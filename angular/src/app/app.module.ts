@@ -45,6 +45,8 @@ import { CustomerInfoModalComponent } from './pages/customer-info-modal/customer
 import { TopShoeSaleComponent } from './pages/top-shoe-sale/top-shoe-sale.component';
 import { ShoeSupplierComponent } from './pages/shoe-supplier/shoe-supplier.component';
 import { CreateOrEditShoeSupplierComponent } from './pages/shoe-supplier/create-or-edit-shoe-supplier/create-or-edit-shoe-supplier.component';
+import { ShoeShopComponent } from './pages/shoe-shop/shoe-shop.component';
+import { CreateOrEditShoeShopComponent } from './pages/shoe-shop/create-or-edit-shoe-shop/create-or-edit-shoe-shop.component';
 
 
 @NgModule({
@@ -79,7 +81,9 @@ import { CreateOrEditShoeSupplierComponent } from './pages/shoe-supplier/create-
     CustomerInfoModalComponent,
     TopShoeSaleComponent,
     ShoeSupplierComponent,
-    CreateOrEditShoeSupplierComponent
+    CreateOrEditShoeSupplierComponent,
+    ShoeShopComponent,
+    CreateOrEditShoeShopComponent
   ],
   imports: [
     BrowserModule,

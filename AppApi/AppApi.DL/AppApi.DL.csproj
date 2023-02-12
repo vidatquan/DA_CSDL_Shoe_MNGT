@@ -99,6 +99,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EmployeeDL.cs" />
     <Compile Include="ShoeDL.cs" />
+    <Compile Include="ShoeShopDL.cs" />
     <Compile Include="ShoesOrderDL.cs" />
     <Compile Include="ShoesReceiveDL.cs" />
     <Compile Include="ShoesShippingDL.cs" />

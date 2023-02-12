@@ -1,3 +1,4 @@
+import { ShoeShopComponent } from './pages/shoe-shop/shoe-shop.component';
 import { HistoryShoeSaleComponent } from './pages/history-shoe-sale/history-shoe-sale.component';
 import { ShoeSaleComponent } from './pages/shoe-sale/shoe-sale.component';
 import { CreateShoeOrderComponent } from './pages/create-shoe-order/create-shoe-order.component';
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'shoe-supplier', component: ShoeSupplierComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-supplier' } },
+  { path: 'shoe-shop', component: ShoeShopComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-shop' } },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' },

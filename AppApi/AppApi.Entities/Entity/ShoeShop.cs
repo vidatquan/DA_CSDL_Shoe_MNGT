@@ -10,5 +10,6 @@ namespace AppApi.Entities.Entity
     {
         public int Id { get; set; }
         public string ShopName { get; set; }
+        public int IsDeleted { get; set; }
     }
 }

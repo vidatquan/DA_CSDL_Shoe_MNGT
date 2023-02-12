@@ -67,7 +67,9 @@
     <Compile Include="DTO\Shoe-shipping\ShoeShippingDetailDto.cs" />
     <Compile Include="DTO\Shoe-shipping\ShoeShippingDetailForViewDto.cs" />
     <Compile Include="DTO\Shoe-shipping\ShoeShippingForViewDto.cs" />
+    <Compile Include="DTO\Shoe-Shop\GetShoeShopInput.cs" />
     <Compile Include="Entity\HistoryShoePrice.cs" />
+    <Compile Include="Entity\ShoeShop.cs" />
     <Compile Include="Entity\ShoeOrder.cs" />
     <Compile Include="Entity\ShoeReceive.cs" />
     <Compile Include="Entity\ShoeShop.cs" />
