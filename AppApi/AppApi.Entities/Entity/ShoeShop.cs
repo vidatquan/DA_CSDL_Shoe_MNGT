@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppApi.Entities.Entity
 {
-    public class Shop
+    public class ShoeShop
     {
         public int Id { get; set; }
         public string ShopName { get; set; }
