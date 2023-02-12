@@ -23,6 +23,7 @@ namespace AppApi.Entities.Entity
         public byte[] Img { get; set; }
         public string ImageString { get; set; }
         public int? IsDeleted { get; set; }
+        public int ShopId { get; set; }
         public DateTime ModifyPriceTime { get; set; }
         
     }

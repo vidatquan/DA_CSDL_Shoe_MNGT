@@ -4,6 +4,9 @@ import { UserService } from 'src/app/_services/user.service';
 import { ceil } from 'lodash';
 import { CreateOrEditEmployeeComponent } from './create-or-edit-employee/create-or-edit-employee.component';
 import { GetEmployeeInput } from 'src/app/_models/employee/GetEmployeeInput';
+import { ShoeShopService } from 'src/app/_services/shoe-shop.service';
+import { GetShoeInfoInput } from 'src/app/_models/shoe-info/GetShoeInfoInput';
+import { ShoeShop } from 'src/app/_models/shoe-shop/ShoeShop';
 declare let alertify: any;
 @Component({
   selector: 'app-employee',
@@ -33,8 +36,9 @@ export class EmployeeComponent implements OnInit {
     {value: 1 , label : "Nghỉ việc"},
   ]
   isDeleted = -1;
+  shopList: ShoeShop[] = []
 
-  constructor(private _employeeService: UserService) {
+  constructor(private _employeeService: UserService, private _shoehShopService: ShoeShopService) {
     this.columnsDef = [
       {
         headerName: 'STT',
@@ -68,7 +72,11 @@ export class EmployeeComponent implements OnInit {
         headerName: 'Email',
         field: 'Email',
       },
-
+      {
+        headerName: 'Cửa hàng',
+        field: 'ShopId',
+        valueFormatter: (param) => this.shopList.find(e => e.Id == param.data.ShopId)?.ShopName,
+      }
     ];
 
     this.defaultColDef = {
@@ -87,6 +95,7 @@ export class EmployeeComponent implements OnInit {
   ngOnInit() {
     this.paginationParams = { pageNum: 1, pageSize: 10, totalCount: 0 };
     this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.getShop();
   }
 
   onSearch(paginationParams: PaginationParamsModel) {
@@ -147,8 +156,15 @@ export class EmployeeComponent implements OnInit {
   //       (err) => console.log(err)
   //     );
   // }
-  
+
   exportExcel(){
     this.params.api.exportDataAsCsv();
+  }
+
+  getShop() {
+    var cus = new GetShoeInfoInput();
+    this._shoehShopService.getShoeShop(cus).subscribe((res) => {
+      this.shopList = res;
+    });
   }
 }

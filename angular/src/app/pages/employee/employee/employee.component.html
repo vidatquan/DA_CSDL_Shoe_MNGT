@@ -71,8 +71,9 @@
   </div>
 </div>
 
-<app-create-or-edit-employee 
-  #createOrEditEmployee 
+<app-create-or-edit-employee
+  #createOrEditEmployee
   (modalSave)="onSearch(paginationParams)"
-  (modalClose)="onChangeSelection(params)">
+  (modalClose)="onChangeSelection(params)"
+  [shopList]="shopList">
 </app-create-or-edit-employee>

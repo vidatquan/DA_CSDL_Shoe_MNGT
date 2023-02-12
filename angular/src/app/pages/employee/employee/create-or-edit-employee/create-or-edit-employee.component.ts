@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Employee } from 'src/app/_models/employee';
 import { GetEmployeeInput } from 'src/app/_models/employee/GetEmployeeInput';
+import { ShoeShop } from 'src/app/_models/shoe-shop/ShoeShop';
 import { UserService } from 'src/app/_services/user.service';
 declare let alertify: any;
 
@@ -28,6 +29,9 @@ export class CreateOrEditEmployeeComponent implements OnInit {
   action:number;
   employeeList = [] ;
   roleList = [];
+  @Input() shopList: ShoeShop[] = [];
+  cbbShopList:  any[] = [];
+
   constructor(private _employeeService: UserService) { }
 
   ngOnInit() {
@@ -39,6 +43,9 @@ export class CreateOrEditEmployeeComponent implements OnInit {
   }
 
   show(action: number, event?) {
+    this.cbbShopList = this.shopList.map(e =>
+      ({value: e.Id, label: e.ShopName})
+    )
     this.getRole();
     if (action != 1) this.getAllEmployeeList();
     this.action = action;
@@ -76,7 +83,7 @@ export class CreateOrEditEmployeeComponent implements OnInit {
     //
     this._employeeService.getRole(employee).subscribe((res) => {
       console.log(res);
-      this.roleList = res.map(e => ({value:e.Id , label: e.RoleName}));
+     res.map(e => e.Id != 1 ? this.roleList .push({value:e.Id , label: e.RoleName}) : null);
       console.log(this.roleList);
     });
   }

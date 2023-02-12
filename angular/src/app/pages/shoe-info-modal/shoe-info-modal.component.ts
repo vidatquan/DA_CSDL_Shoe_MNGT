@@ -71,6 +71,7 @@ export class ShoeInfoModalComponent implements OnInit {
 
   ngOnInit() {
     this.paginationParams = { pageNum: 1, pageSize: 10, totalCount: 0 };
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   onSearch(paginationParams: PaginationParamsModel) {
@@ -84,6 +85,7 @@ export class ShoeInfoModalComponent implements OnInit {
     shoes.Color = 'Tất cả';
     shoes.ShoeType = -1;
     shoes.IsDeleted = 0;
+    shoes.ShopId = this.user.ShopId ?? -1;
     this._shoesService.getShoesInfo(shoes).subscribe((res) => {
       this.rowData = res;
       this.pagedRowData =
@@ -137,5 +139,5 @@ export class ShoeInfoModalComponent implements OnInit {
     this.modalSave.emit(this.selectedData);
     this.close();
   }
-  
+
 }

@@ -6,6 +6,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PaginationParamsModel } from 'src/app/_components/shared/common/models/base.model';
 import { UserService } from 'src/app/_services/user.service';
 import { GetShoeInfoInput } from 'src/app/_models/shoe-info/GetShoeInfoInput';
+import { ShoeShopService } from 'src/app/_services/shoe-shop.service';
+import { ShoeShop } from 'src/app/_models/shoe-shop/ShoeShop';
 declare let alertify: any;
 @Component({
   selector: 'app-shoe-info',
@@ -28,12 +30,13 @@ export class ShoeInfoComponent implements OnInit {
 
   fullName: string;
   code: string;
-  
+
   type = -1;
   gender = -1;
   size = -1;
   color = "Tất cả";
   status = -1;
+  shopId = -1;
   colorList: any[] = [
     { label: "Tất cả", value: "Tất cả" },
     { label: "Đen", value: "Đen" },
@@ -45,7 +48,7 @@ export class ShoeInfoComponent implements OnInit {
     { label: "Xanh rêu", value: "Xanh rêu" },
     { label: "Phối màu", value: "Phối màu" },
   ];
-  
+
   statusList: any[] = [
     { label: "Tất cả", value: -1 },
     { label: "Hoạt động", value: 0 },
@@ -103,9 +106,13 @@ export class ShoeInfoComponent implements OnInit {
     { label: "43 1/2", value: 4312 },
   ];
 
+  shopList: ShoeShop[] = []
+  cbbShopList: any[] = [{value: -1, label: 'Tất cả'}]
+
+
   constructor(
     private _dataFormatService: DataFormatService,
-    private _shoesService: ShoesService) {
+    private _shoesService: ShoesService, private _shoehShopService: ShoeShopService) {
     this.columnsDef = [
       {
         headerName: 'STT',
@@ -125,6 +132,12 @@ export class ShoeInfoComponent implements OnInit {
         headerName: 'Số lượng',
         field: 'ShoeQty',
         cellStyle: (params) => {  if(params.data.ShoeQty == 0) return { color: 'white', backgroundColor: '#FF0033' }; }
+      },
+      {
+        headerName: 'Cửa hàng',
+        field: 'ShopId',
+        valueFormatter: (param) => this.shopList.find(e => e.Id == param.data.ShopId)?.ShopName,
+
       },
     ];
     this.historyColumnsDef = [
@@ -175,7 +188,9 @@ export class ShoeInfoComponent implements OnInit {
 
   ngOnInit() {
     this.paginationParams = { pageNum: 1, pageSize: 10, totalCount: 0 };
-    //this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.getShop()
+    this.shopId = this.user.ShopId;
   }
 
   onSearch(paginationParams: PaginationParamsModel) {
@@ -192,6 +207,7 @@ export class ShoeInfoComponent implements OnInit {
     shoes.Color = this.color ?? 'Tất cả';
     shoes.ShoeType = this.type ?? -1;
     shoes.IsDeleted = this.status ?? -1;
+    shoes.ShopId = this.shopId ?? -1;
     this._shoesService.getShoesInfo(shoes).subscribe((res) => {
       this.rowData = res;
       this.pagedRowData =
@@ -245,6 +261,16 @@ export class ShoeInfoComponent implements OnInit {
     var body = new GetShoeReceiveDetailInput();
     body.Id = this.selectedData.Id;
     this._shoesService.getHistoryShoePrice(body).subscribe((res) => {this.hisData = res; });
+  }
+
+  getShop() {
+    var cus = new GetShoeInfoInput();
+    this._shoehShopService.getShoeShop(cus).subscribe((res) => {
+      this.shopList = res;
+      this.shopList.map(e =>
+        this.cbbShopList.push({value: e.Id, label: e.ShopName})
+      )
+    });
   }
 }
 

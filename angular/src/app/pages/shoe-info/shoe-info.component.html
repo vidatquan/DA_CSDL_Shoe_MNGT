@@ -27,6 +27,9 @@
       <div class="col-3">
         <tmss-combobox [text]="'Màu'" [items]="colorList" [(ngModel)]="color"></tmss-combobox>
       </div>
+      <div class="col-3">
+        <tmss-combobox [text]="'Cửa hàng'" [items]="cbbShopList" [(ngModel)]="shopId"></tmss-combobox>
+      </div>
       <div class="col-1">
         <button class="tmss-btn btn-outline-primary mr-2 mt-1" (click)="onGridReady(paginationParams)">
           <i class="fa tmss-fa fa-search"></i>
@@ -82,15 +85,16 @@
   <div class="row mt-1">
     <div class="col-12">
       <grid-table [columnDefs]="historyColumnsDef" [defaultColDef]="defaultColDef" [rowData]="hisData"
-        (callBackEvent)="callBackHistoryShoePriceEvent($event)" 
+        (callBackEvent)="callBackHistoryShoePriceEvent($event)"
         [height]="'220px'" [showPagination]="false" >
       </grid-table>
     </div>
   </div>
 </div>
 
-<app-create-or-edit-shoe-info 
-  #createOrEditShoeInfo 
+<app-create-or-edit-shoe-info
+  #createOrEditShoeInfo
   (modalSave)="onSearch(paginationParams)"
+  [user]="user"
   >
 </app-create-or-edit-shoe-info>

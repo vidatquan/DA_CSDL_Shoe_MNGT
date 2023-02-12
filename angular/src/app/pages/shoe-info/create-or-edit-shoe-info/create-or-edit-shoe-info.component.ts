@@ -18,6 +18,7 @@ export class CreateOrEditShoeInfoComponent implements OnInit {
   @ViewChild('modal') public modal: ModalDirective;
   // @ViewChild('imgContainer') imgContainer: { nativeElement: { getBoundingClientRect: () => { (): any; new(): any; height: number; width: number; }; }; } | undefined;
   @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
+  @Input() user;
   url: SafeResourceUrl | any | undefined;
   colorList: any[]= [
     {label:"Đen",value:"Đen"},
@@ -88,7 +89,7 @@ export class CreateOrEditShoeInfoComponent implements OnInit {
   color: any;
   action: number; // 1 xem chi tiết, 2 thêm mới, 3 sửa
   shoeList = [];
-  
+
   constructor(private _shoesService: ShoesService) { }
 
   ngOnInit() {
@@ -112,6 +113,7 @@ export class CreateOrEditShoeInfoComponent implements OnInit {
     }
     else if (action == 2) {
       this.shoe = new Shoes();
+      this.shoe.ShopId = this.user.ShopId
     }
     this.modal.show();
   }
@@ -143,8 +145,8 @@ export class CreateOrEditShoeInfoComponent implements OnInit {
     }
     else if (this.action ==3){
       var body = new HistoryShoePrice();
-      if(this.shoe.RealPrice != JSON.parse(localStorage.getItem('oldRealPrice')) || 
-      this.shoe.SellPrice != JSON.parse(localStorage.getItem('oldSellPrice'))) 
+      if(this.shoe.RealPrice != JSON.parse(localStorage.getItem('oldRealPrice')) ||
+      this.shoe.SellPrice != JSON.parse(localStorage.getItem('oldSellPrice')))
         {
           body.Id = 0;
           body.ShoeId = this.shoe.Id;
@@ -175,7 +177,7 @@ export class CreateOrEditShoeInfoComponent implements OnInit {
 
       }
     }
-    
+
   }
 
   checkValidate() {
@@ -244,7 +246,7 @@ export class CreateOrEditShoeInfoComponent implements OnInit {
           }
         }
       }
-      
+
       this.url = e.target?.result;
       this.shoe.ImageString = this.url;
     }

@@ -16,5 +16,6 @@ namespace AppApi.Entities.DTO.Shoe_info
         public Gender? Gender { get; set; }
         public ShoeType? ShoeType { get; set; }
         public int? IsDeleted { get; set; }
+        public int? ShopId { get; set; }
     }
 }

@@ -8,6 +8,7 @@ export class Employee {
   EmpCode: string;
   Address: string;
   RoleId: number;
+  ShopId: number;
   Token: string;
   Username: string;
   Password: string;

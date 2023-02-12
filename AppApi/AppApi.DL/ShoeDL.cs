@@ -29,6 +29,7 @@ namespace AppApi.DL
             cmd.Parameters.AddWithValue("@ShoeType", input.ShoeType);
             cmd.Parameters.AddWithValue("@Color", input.Color);
             cmd.Parameters.AddWithValue("@IsDeleted", input.IsDeleted);
+            cmd.Parameters.AddWithValue("@ShopId", input.ShopId ?? -1);
             cmd.CommandType = CommandType.StoredProcedure;
             SqlDataReader sqlDataReader = cmd.ExecuteReader();
 
@@ -50,6 +51,7 @@ namespace AppApi.DL
                     shoe.ShoeType = (ShoeType)sqlDataReader["shoetype"];
                     shoe.Note = sqlDataReader["note"].ToString();
                     shoe.IsDeleted = (int)sqlDataReader["isdeleted"];
+                    shoe.ShopId = (int)sqlDataReader["ShopId"];
                     if (!Convert.IsDBNull(sqlDataReader["shoeimage"]))
                     {
                         shoe.Img = (byte[])sqlDataReader["shoeimage"];
@@ -74,7 +76,7 @@ namespace AppApi.DL
             input.ModifyPriceTime = input.ModifyPriceTime.AddHours(7);
             _conn.Open();
 
-            string SQL = string.Format("INSERT INTO dbo.shoes(shoename,shoecode,shoeqty,shoesize,realprice,sellprice,color,gender,shoetype,isdeleted,note,shoeimage, modifypricetime) VALUES(@Name, @Code, @Qty, @Size,@RealPrice,@SellPrice,@Color,@Gender ,@Type,@IsDeleted, @Note,@Image, @ModifyPriceTime)");
+            string SQL = string.Format("INSERT INTO dbo.shoes(shoename,shoecode,shoeqty,shoesize,realprice,sellprice,color,gender,shoetype,isdeleted,note,shoeimage, modifypricetime, ShopId) VALUES(@Name, @Code, @Qty, @Size,@RealPrice,@SellPrice,@Color,@Gender ,@Type,@IsDeleted, @Note,@Image, @ModifyPriceTime, @ShopId)");
             SqlCommand sqlCommand = new SqlCommand(SQL, _conn);
             sqlCommand.Parameters.AddWithValue("@Name", input.ShoeName ?? "");
             sqlCommand.Parameters.AddWithValue("@Code", input.ShoeCode ?? "");
@@ -86,6 +88,7 @@ namespace AppApi.DL
             sqlCommand.Parameters.AddWithValue("@Gender", (int?)input.Gender ?? -1);
             sqlCommand.Parameters.AddWithValue("@Type", (int?)input.ShoeType ?? -1);
             sqlCommand.Parameters.AddWithValue("@IsDeleted", input.IsDeleted ?? 0);
+            sqlCommand.Parameters.AddWithValue("@ShopId", input.ShopId);
             sqlCommand.Parameters.AddWithValue("@Note", input.Note ?? "");
             sqlCommand.Parameters.AddWithValue("@ModifyPriceTime", input.ModifyPriceTime);
             byte[] myByteArray = Convert.FromBase64String(input.ImageString);

@@ -1,6 +1,6 @@
 <div class="nav-container" *ngIf="currentUser">
   <div class="nav-header row">
-    <div class="header-icon col-10" style="padding-left: 22px;">
+    <div class="header-icon col-9" style="padding-left: 22px;">
       <i style="
           align-items: center;
           display: flex;
@@ -9,9 +9,10 @@
         " class="fa fa-bars" (click)="checkNav()"></i>
       <h4 style="margin-left: 20px; margin-top: 10px;" routerLink="home">A&nbsp;D&nbsp;I&nbsp;D&nbsp;A&nbsp;S</h4>
     </div>
-    <div class="header-icon col-2 text-center" style="text-align: center;cursor: pointer;">
+    <div class="header-icon col-3 text-center" style="text-align: center;cursor: pointer;">
       <img (click)="drop.click()" [src]="url" alt="Avatar" style=" margin-left: 0px;
         margin-right: 15px;display: flex;border:0.5px solid #555; border-radius: 50%; height: 30px; width: 30px;" >
+        <h5 style="margin-right: 20px; margin-top: 10px;" (click)="drop.click()" >{{shopName}}</h5>
       <h5 style="font-size: 2.25rem;margin-top: 10px;margin-right: 10px;" (click)="drop.click()" >&frasl;</h5>
       <h5 style="margin-right: 20px; margin-top: 10px;" (click)="drop.click()" >{{currentUser.FullName}}</h5>
       <button type="button" data-toggle="dropdown"  #drop> </button>

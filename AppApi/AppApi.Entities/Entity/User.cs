@@ -23,6 +23,6 @@ namespace AppApi.Entities.Entity
         public string EmpCode { get; set; }
         public string Token { get; set; }
         public int IsDeleted { get; set; }
-
+        public int ShopId { get; set; }
     }
 }

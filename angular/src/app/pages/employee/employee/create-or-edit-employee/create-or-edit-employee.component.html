@@ -34,6 +34,11 @@
         <div class="col-9" style="padding-top: 20px;">
           <div class="row mt-1">
             <div class="col-6">
+              <tmss-combobox [isRequired]="action != 1" [disabled]="action == 1" [text]="'Cửa hàng'" [items]="cbbShopList"  [(ngModel)]="employee.ShopId"></tmss-combobox>
+            </div>
+          </div>
+          <div class="row mt-1">
+            <div class="col-6">
               <tmss-text-input [isRequired]="action != 1" [disabled]="action == 1" [text]="'Mã Nhân viên'"  [(ngModel)]="employee.EmpCode"></tmss-text-input>
             </div>
             <div class="col-6">

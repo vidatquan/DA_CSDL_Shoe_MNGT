@@ -6,4 +6,5 @@ export class GetShoeInfoInput {
     Gender:number;
     ShoeType: number;
     IsDeleted: number;
+    ShopId: number;
     }

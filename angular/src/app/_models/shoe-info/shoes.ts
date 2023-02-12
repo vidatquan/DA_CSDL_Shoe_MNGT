@@ -14,5 +14,6 @@ export class Shoes {
   Img: Int8Array;
   ImageString: string;
   IsDeleted: number;
+  ShopId: number;
   ModifyPriceTime: Moment|null;
   }

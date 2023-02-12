@@ -2,7 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { Employee } from 'src/app/_models/employee';
+import { GetShoeInfoInput } from 'src/app/_models/shoe-info/GetShoeInfoInput';
+import { ShoeShop } from 'src/app/_models/shoe-shop/ShoeShop';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { ShoeShopService } from 'src/app/_services/shoe-shop.service';
 
 @Component({
   selector: 'app-navbar',
@@ -21,9 +24,12 @@ export class NavbarComponent {
   check2 = false;
   check3 = false;
   check4 = false;
+  shopList: ShoeShop[] = []
+  shopName: string = ''
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
+    private _shoehShopService: ShoeShopService
   ) {
     this.columnDefs = [
       { field: 'make' },
@@ -41,18 +47,19 @@ export class NavbarComponent {
     .subscribe(
       (x) => {
         this.currentUser = x;
-        
+
       }
     );
-    
-    
+
+
   }
-  
+
   ngOnInit(){
     if (!this.currentUser.ImageString)
-      this.url = "assets/img/userIcon.jpg" 
+      this.url = "assets/img/userIcon.jpg"
     else
        this.url = 'data:image/jpeg;base64,' + this.currentUser.ImageString;
+       this.getShop()
   }
 
   logout() {
@@ -101,6 +108,14 @@ export class NavbarComponent {
   showEditEmp(){
     this.router.navigate(['/log-info']);
     setTimeout(()=> {window.location.reload();},5);
+  }
+
+  getShop() {
+    var cus = new GetShoeInfoInput();
+    this._shoehShopService.getShoeShop(cus).subscribe((res) => {
+      this.shopList = res;
+      this.shopName = this.shopList.find(e => e.Id == this.currentUser.ShopId)?.ShopName ?? '';
+    });
   }
 
   defaultPic(){

@@ -49,6 +49,7 @@ namespace AppApi.DL
                     employee.Username = sqlDataReader["user_name"].ToString();
                     employee.Password = sqlDataReader["password"].ToString();
                     employee.RoleId = (int)sqlDataReader["role_id"];
+                    employee.ShopId = (int)sqlDataReader["ShopId"];
                     if (!Convert.IsDBNull(sqlDataReader["image"]))
                     {
                         employee.Img = (byte[])sqlDataReader["image"];
@@ -85,6 +86,7 @@ namespace AppApi.DL
             byte[] myByteArray = Convert.FromBase64String(input.ImageString);
             sqlCommand.Parameters.AddWithValue("@Image", myByteArray);
             sqlCommand.Parameters.AddWithValue("@RoleId", input.RoleId);
+            sqlCommand.Parameters.AddWithValue("@ShopId", input.ShopId);
 
             sqlCommand.CommandType = CommandType.StoredProcedure;
             //sqlCommand.ExecuteNonQuery();
@@ -112,6 +114,7 @@ namespace AppApi.DL
             sqlCommand.Parameters.AddWithValue("@Address", input.Address ?? "");
             sqlCommand.Parameters.AddWithValue("@IsDeleted", input.IsDeleted);
             sqlCommand.Parameters.AddWithValue("@RoleId", input.RoleId);
+            sqlCommand.Parameters.AddWithValue("@ShopId", input.ShopId);
             byte[] myByteArray = Convert.FromBase64String(input.ImageString);
             sqlCommand.Parameters.AddWithValue("@Image", myByteArray);
             //sqlCommand.Parameters.AddWithValue("@Birthday", input.Birthday);
@@ -189,6 +192,7 @@ namespace AppApi.DL
                     employee.Email = sqlDataReader["email"].ToString();
                     employee.Cmnd = sqlDataReader["cmnd"].ToString();
                     employee.Address = sqlDataReader["address"].ToString();
+                    employee.ShopId = (int)sqlDataReader["ShopId"];
                     if (!Convert.IsDBNull(sqlDataReader["image"]))
                     {
                         employee.Img = (byte[])sqlDataReader["image"];
