@@ -190,4 +190,30 @@ declare @FromDate1 datetime2, @ToDate1 datetime2
 set @FromDate1 = '2022-02-12 00:20:34.563';
 set @ToDate1 = getdate();
 exec [GetShoeShipping] @FromDate1 , @ToDate1, null, null, null, 1
-
+go
+create or alter trigger  Update_Shop_InActive
+	on Shop 
+	for update 
+as
+begin
+	begin transaction
+		if( (select isdeleted from inserted) = 1)
+		begin
+			update users set isdeleted = 1 where ShopId = (select Id from inserted)
+		end
+	commit transaction;
+end;
+go
+create or alter trigger Update_Supplier_InActive
+	on Supplier 
+	for update 
+as
+begin
+	begin transaction
+		if( (select IsDelete from inserted) = 1)
+		begin
+			update shoeorder set orderstatus = 3 where SupplierName = (select suppliername from inserted)
+		end
+	commit transaction;
+end;
+go
