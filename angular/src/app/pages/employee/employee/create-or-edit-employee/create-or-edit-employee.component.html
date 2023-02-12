@@ -43,7 +43,7 @@
           </div>
           <div class="row mt-4">
             <div class="col-6">
-              <tmss-combobox [isRequired]="action != 1 && employee.RoleId != 1" [disabled]="action == 1" [text]="'Trạng thái'" [items]="statusList"   [(ngModel)]="employee.IsDeleted"></tmss-combobox>
+              <tmss-combobox [isRequired]="action != 1" [disabled]="action == 1" [text]="'Trạng thái'" [items]="statusList"   [(ngModel)]="employee.IsDeleted"></tmss-combobox>
             </div>
             <div class="col-6">
               <tmss-combobox [isRequired]="action != 1" [disabled]="action == 1" [text]="'Chức vụ'" [(ngModel)]="employee.RoleId" [items]="roleList"></tmss-combobox>
