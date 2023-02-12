@@ -130,7 +130,12 @@ export class CreateShoeOrderComponent implements OnInit {
     cus.CusName =  '';
     cus.CusTel = '';
     this._shoeSupplierService.getCustomers(cus).subscribe((res) => {
-      res.map(e => this.supplierList.push({value:e.Id, label:e.SupplierName}));
+      res.map(e => {
+        if(e.IsDelete == 0)
+        {
+          this.supplierList.push({value:e.Id, label:e.SupplierName})
+        }
+      });
     });
   }
   callBackEvent(event) {

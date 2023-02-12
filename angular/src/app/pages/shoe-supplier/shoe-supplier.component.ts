@@ -32,7 +32,7 @@ export class ShoeSupplierComponent implements OnInit {
   }
   statusList = [
     {value: 0 , label : "Hoạt động"},
-    {value: 1 , label : "Nghỉ việc"},
+    {value: 1 , label : "Dừng hoạt động"},
   ]
   constructor(private _shoeSupplierService: ShoeSupplierService) {
     this.columnsDef = [

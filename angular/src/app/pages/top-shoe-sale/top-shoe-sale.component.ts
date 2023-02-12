@@ -14,7 +14,7 @@ import { Moment } from 'moment';
 import { ReportInput } from 'src/app/_models/shoe-report/ReportInput';
 import { ShoesShippingService } from 'src/app/_services/shoes-shipping.service';
     declare let alertify: any;
-    
+
     @Component({
       selector: 'app-history-shoe-sale',
       templateUrl: './top-shoe-sale.component.html',
@@ -23,14 +23,14 @@ import { ShoesShippingService } from 'src/app/_services/shoes-shipping.service';
     export class TopShoeSaleComponent implements OnInit {
       @ViewChild('shoeInfoModal', { static: false }) shoeInfoModal: ShoeInfoModalComponent;
       paginationParams: PaginationParamsModel;
-    
+
       columnsDef;
       defaultColDef;
       rowData = [];
       params: any;
       user;
       selectedData;
-    
+
       fullName: string;
       orderDate: any;
       orderDateFormat: any;
@@ -43,7 +43,7 @@ import { ShoesShippingService } from 'src/app/_services/shoes-shipping.service';
       //
       fromDate:Moment|null;
       toDate:Moment|null;
-    
+
       constructor(
         private _shoeShippingService: ShoesShippingService,
         private _dataFormatService: DataFormatService,
@@ -77,7 +77,7 @@ import { ShoesShippingService } from 'src/app/_services/shoes-shipping.service';
             valueFormatter: (params) => this._dataFormatService.moneyFormat(params.data?.TotalPrice)
           },
         ];
-    
+
         this.defaultColDef = {
           flex: 1,
           resizable: true,
@@ -90,7 +90,7 @@ import { ShoesShippingService } from 'src/app/_services/shoes-shipping.service';
           },
         };
       }
-    
+
       ngOnInit() {
         this.paginationParams = { pageNum: 1, pageSize: 10, totalCount: 0 };
         this.user = JSON.parse(localStorage.getItem('currentUser'));
@@ -98,27 +98,28 @@ import { ShoesShippingService } from 'src/app/_services/shoes-shipping.service';
         this.orderDate = moment();
         this.orderDateFormat = this._dataFormatService.dateTimeFormat(this.orderDate);
       }
-    
+
       onSearch() {
         if(!this.checkValidate()) return;
         this.selectedData = undefined;
-    
+
         var body = new ReportInput();
         body.FromDate = this.fromDate ?? moment();
         body.ToDate = this.toDate ?? moment();
+        body.ShopId = this.user?.ShopId;
         this._shoeShippingService.getReportTopShoeSale(body).subscribe((res) => {
           this.rowData = res;
         });
       }
-    
+
       callBackEvent(event) {
         this.params = event;
       }
-    
+
       exportToExcel(){
         this.params.api.exportDataAsCsv();
       }
-  
+
       checkValidate(){
         if(this.fromDate == undefined || this.toDate == undefined){
           alertify.error("Ngày không hợp lệ");
@@ -126,9 +127,8 @@ import { ShoesShippingService } from 'src/app/_services/shoes-shipping.service';
         };
         return true;
       }
-  
+
     }
-    
-    
-    
-    
+
+
+

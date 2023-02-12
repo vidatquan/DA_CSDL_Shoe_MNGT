@@ -6,7 +6,7 @@ import { Moment } from 'moment';
 import { ReportInput } from 'src/app/_models/shoe-report/ReportInput';
 import { ShoesShippingService } from 'src/app/_services/shoes-shipping.service';
   declare let alertify: any;
-  
+
   @Component({
     selector: 'app-history-shoe-sale',
     templateUrl: './history-shoe-sale.component.html',
@@ -22,11 +22,11 @@ import { ShoesShippingService } from 'src/app/_services/shoes-shipping.service';
     pagedRowData;
     fromDate:Moment|null;
     toDate:Moment|null;
-    
+
     tongThu:number;
     tongChi:number;
     soDu:number;
-  
+
     constructor(
       private _shoeShippingService: ShoesShippingService,
       private _dataFormatService: DataFormatService,
@@ -70,7 +70,7 @@ import { ShoesShippingService } from 'src/app/_services/shoes-shipping.service';
           cellStyle: (params) => { if(params.data.Status == 1) return { color: '#003366', backgroundColor: '#00FF00' }; }
         },
       ];
-  
+
       this.defaultColDef = {
         flex: 1,
         resizable: true,
@@ -83,31 +83,32 @@ import { ShoesShippingService } from 'src/app/_services/shoes-shipping.service';
         },
       };
     }
-  
+
     ngOnInit() {
       this.user = JSON.parse(localStorage.getItem('currentUser'));
     }
-  
+
     onSearch() {
       if(!this.checkValidate()) return;
       this.selectedData = undefined;
       this.tongThu = undefined;
       this.tongChi = undefined;
       this.soDu = undefined;
-  
+
       var body = new ReportInput();
       body.FromDate = this.fromDate ?? moment();
       body.ToDate = this.toDate ?? moment();
+      body.ShopId = this.user?.ShopId;
       this._shoeShippingService.getReportProfits(body).pipe(finalize(() => setTimeout(() => this.calculateFooter(),20)))
         .subscribe((res) => {
         this.rowData = res;
       });
     }
-  
+
     callBackEvent(event) {
       this.params = event;
     }
-  
+
     exportToExcel(){
       this.params.api.exportDataAsCsv();
     }
@@ -133,10 +134,9 @@ import { ShoesShippingService } from 'src/app/_services/shoes-shipping.service';
         if(e.data.Status == 1) this.tongThu += Number(e.data.TotalPrice);
         this.soDu = this.tongThu - this.tongChi;
       })
-  
+
     }
   }
-  
-  
-  
-  
+
+
+

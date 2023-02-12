@@ -160,9 +160,10 @@ namespace AppApi.DL
             foreach (var inp in input.ShoesList)
             {
                 #region --lưu thông tin chi tiết của đơn hàng
-                _conn.Open();
+                
                 if(input.TypeShipping == 1)
                 {
+                    _conn.Open();
                     string SQL6 = string.Format("UpdateShoesForShoes");
                     SqlCommand sqlCommand6 = new SqlCommand(SQL6, _conn);
 
@@ -235,6 +236,7 @@ namespace AppApi.DL
 
             cmd.Parameters.AddWithValue("@FromDate", input.FromDate);
             cmd.Parameters.AddWithValue("@ToDate", input.ToDate);
+            cmd.Parameters.AddWithValue("@ShopId", input.ShopId);
 
             cmd.CommandType = CommandType.StoredProcedure;
             SqlDataReader sqlDataReader = cmd.ExecuteReader();
@@ -277,6 +279,7 @@ namespace AppApi.DL
 
             cmd.Parameters.AddWithValue("@FromDate", input.FromDate);
             cmd.Parameters.AddWithValue("@ToDate", input.ToDate);
+            cmd.Parameters.AddWithValue("@ShopId", input.ShopId);
 
             cmd.CommandType = CommandType.StoredProcedure;
             SqlDataReader sqlDataReader = cmd.ExecuteReader();

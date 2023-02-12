@@ -19,7 +19,7 @@
                   </h6>
                 </div> -->
                 <div class="col-3">
-                  <tmss-combobox [isRequired]="true" [text]="'Hình thức'" [(ngModel)]="type" [items]="typeList"></tmss-combobox>
+                  <tmss-combobox [isRequired]="true" [text]="'Hình thức'" [(ngModel)]="type" [items]="typeList" (onChangeValue)="onChangeCbb($event)"></tmss-combobox>
                 </div>
               </div>
               <div class="row mb-3">

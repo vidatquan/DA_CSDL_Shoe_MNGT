@@ -295,9 +295,20 @@ export class CreateOrEditShoeSaleComponent implements OnInit {
     var cus = new GetShoeInfoInput();
     this._shoehShopService.getShoeShop(cus).subscribe((res) => {
       this.shopList = res;
-      this.shopList.map(e =>
-        this.cbbShopList.push({value: e.Id, label: e.ShopName})
-      )
+      this.shopList.map(e =>{
+        if(this.user?.ShopId != e.Id)
+        {
+          this.cbbShopList.push({value: e.Id, label: e.ShopName});
+        }
+      })
     });
+  }
+
+  onChangeCbb(param){
+    console.log(param);
+    if(param == 1)
+    {
+      this.cusRate = 0;
+    }
   }
 }

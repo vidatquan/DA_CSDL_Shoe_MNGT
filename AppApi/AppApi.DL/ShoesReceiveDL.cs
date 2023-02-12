@@ -16,6 +16,9 @@ namespace AppApi.DL
 
         public List<ShoeReceive> GetShoeReceive(GetShoeReceiveInput input)
         {
+            input.FromDate = input.FromDate.Value.AddHours(7);
+            input.ToDate = input.ToDate.Value.AddHours(7);
+
             _conn.Open();
 
             string spName = @"dbo.[GetShoeReceive]";

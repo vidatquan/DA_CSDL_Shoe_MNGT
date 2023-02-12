@@ -16,6 +16,8 @@ namespace AppApi.DL
 
         public List<ShoeOrder> GetShoeOrder(GetShoeOrderInput input)
         {
+            input.FromDate = input.FromDate.Value.AddHours(7);
+            input.ToDate = input.ToDate.Value.AddHours(7);
             _conn.Open();
 
             string spName = @"dbo.[GetShoeOrder]";

@@ -10,5 +10,6 @@ namespace AppApi.Entities.DTO.Shoe_Report
     {
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+        public int ShopId { get; set; }
     }
 }
