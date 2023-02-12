@@ -70,7 +70,9 @@
     <Compile Include="Entity\HistoryShoePrice.cs" />
     <Compile Include="Entity\ShoeOrder.cs" />
     <Compile Include="Entity\ShoeReceive.cs" />
+    <Compile Include="Entity\ShoeShop.cs" />
     <Compile Include="Entity\ShoesShipping.cs" />
+    <Compile Include="Entity\ShoeSupplier.cs" />
     <Compile Include="Enum\Gender.cs" />
     <Compile Include="Enum\ShoeType.cs" />
     <Compile Include="EmployeeInputDto.cs" />

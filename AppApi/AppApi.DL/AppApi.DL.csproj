@@ -102,6 +102,7 @@
     <Compile Include="ShoesOrderDL.cs" />
     <Compile Include="ShoesReceiveDL.cs" />
     <Compile Include="ShoesShippingDL.cs" />
+    <Compile Include="ShoeSupplierDL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AppApi.Entities\AppApi.Entities.csproj">

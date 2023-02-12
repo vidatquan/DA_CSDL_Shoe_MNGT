@@ -14,6 +14,7 @@ import { ShoeInfoComponent } from './pages/shoe-info/shoe-info.component';
 import { ShoeReceiveComponent } from './pages/shoe-receive/shoe-receive.component';
 import { HistoryReceiveShoeComponent } from './pages/history-receive-shoe/history-receive-shoe.component';
 import { TopShoeSaleComponent } from './pages/top-shoe-sale/top-shoe-sale.component';
+import { ShoeSupplierComponent } from './pages/shoe-supplier/shoe-supplier.component';
 
 const appRoutes: Routes = [
   { path: 'log-info', component: LogInfoComponent, canActivate: [AuthGuard] ,data: { state: 'log-info' } },
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
   { path: 'top-shoe-sale', component: TopShoeSaleComponent, canActivate: [AuthGuard] ,data: { state: 'top-shoe-sale' } },
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'shoe-supplier', component: ShoeSupplierComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-supplier' } },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' },

@@ -43,6 +43,8 @@ import { CreateOrEditShoeSaleComponent } from './pages/shoe-sale/create-or-edit-
 import { HistoryShoeSaleComponent } from './pages/history-shoe-sale/history-shoe-sale.component';
 import { CustomerInfoModalComponent } from './pages/customer-info-modal/customer-info-modal.component';
 import { TopShoeSaleComponent } from './pages/top-shoe-sale/top-shoe-sale.component';
+import { ShoeSupplierComponent } from './pages/shoe-supplier/shoe-supplier.component';
+import { CreateOrEditShoeSupplierComponent } from './pages/shoe-supplier/create-or-edit-shoe-supplier/create-or-edit-shoe-supplier.component';
 
 
 @NgModule({
@@ -75,7 +77,9 @@ import { TopShoeSaleComponent } from './pages/top-shoe-sale/top-shoe-sale.compon
     CreateOrEditShoeSaleComponent,
     HistoryShoeSaleComponent,
     CustomerInfoModalComponent,
-    TopShoeSaleComponent
+    TopShoeSaleComponent,
+    ShoeSupplierComponent,
+    CreateOrEditShoeSupplierComponent
   ],
   imports: [
     BrowserModule,
