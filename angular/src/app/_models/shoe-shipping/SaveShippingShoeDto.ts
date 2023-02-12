@@ -12,5 +12,6 @@ export class SaveShippingShoeDto {
     SalesMan:number;
     Note:number;
     CusRate:number;
+    TypeShipping:number;
     ShoesList: ShoeShippingDetailDto[];
   }

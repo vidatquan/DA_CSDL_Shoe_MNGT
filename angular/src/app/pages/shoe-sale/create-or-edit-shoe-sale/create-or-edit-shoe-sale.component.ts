@@ -12,6 +12,9 @@ import { DataFormatService } from 'src/app/_services/data-format.service';
 import { SaveShippingShoeDto } from 'src/app/_models/shoe-shipping/SaveShippingShoeDto';
 import * as moment from 'moment';
 import { finalize } from 'rxjs/operators';
+import { ShoeShopService } from 'src/app/_services/shoe-shop.service';
+import { ShoeShop } from 'src/app/_models/shoe-shop/ShoeShop';
+import { GetShoeInfoInput } from 'src/app/_models/shoe-info/GetShoeInfoInput';
 declare let alertify: any;
 @Component({
   selector: 'create-or-edit-shoe-sale',
@@ -42,6 +45,12 @@ export class CreateOrEditShoeSaleComponent implements OnInit {
   confirmOrder = false;
   shoeList = [];
   selectedNode: any;
+  typeList: any[] = [{value: 0, label: 'Bán lẻ'}, {value: 1, label: 'Xuất nội bộ'}]
+  type: number = 0;
+  shopList: ShoeShop[] = [];
+  cbbShopList: any[] = [];
+  shopId: number;
+
   getCusRate(price){
     if(price >=0 && price < 15000000) return 0;
     if(price >=15000000 && price < 35000000) return 3;
@@ -52,7 +61,8 @@ export class CreateOrEditShoeSaleComponent implements OnInit {
 
   constructor(
     private _shoesShippigService: ShoesShippingService,
-    private _dataFormatService: DataFormatService,) {
+    private _dataFormatService: DataFormatService,
+    private _shoehShopService: ShoeShopService) {
     this.columnsDef = [
       {
         headerName: 'STT',
@@ -111,10 +121,12 @@ export class CreateOrEditShoeSaleComponent implements OnInit {
       },
     };
   }
- 
+
   ngOnInit() {
     this.customer = new Customer();
     this.rowData = [];
+    this.getShop()
+
   }
 
   show(){
@@ -216,7 +228,8 @@ export class CreateOrEditShoeSaleComponent implements OnInit {
   confirm() {
     var check = false;
     var check1 = false;
-    if(!this.customer.Id) return alertify.error('Thiếu thông tin KH');
+    if(this.type == 0 && !this.customer.Id) return alertify.error('Thiếu thông tin KH');
+    if(this.type == 1 && this.shopId == null) return alertify.error('Thiếu thông tin KH');
     if(this.params.api.getDisplayedRowCount()  <= 0 ) return alertify.error('Danh sách mua hàng không hợp lệ');
     this.params.api.forEachNode(e => {
       if(!e.data.Id || !Number.isInteger(Number(e.data.ShippingQty)) || Number(e.data.OrderQty) <= 0) check = true; //|| Number(e.data.OrderQty) <= 0) check = true;
@@ -229,17 +242,18 @@ export class CreateOrEditShoeSaleComponent implements OnInit {
     this.params.api.redrawRows();
     this.calculateFooter();
   }
-  
+
   save() {
     var body = new SaveShippingShoeDto();
     body.SalesMan = JSON.parse(localStorage.getItem('currentUser')).FullName;
-    body.ShippingUser = this.customer.CusName;
+    body.ShippingUser = this.type == 0 ? this.customer.CusName : this.shopList.find(e => e.Id == this.shopId)?.ShopName;
     body.ShippingNo = '';
-    body.ShippingDate = moment(); 
-    body.CusId = this.customer.Id;
+    body.ShippingDate = moment();
+    body.CusId = this.type == 0 ? this.customer.Id : this.shopId;
     body.ShoesList = [];
     body.TotalPrice = 0;
-    body.CusRate = this.cusRate;
+    body.CusRate = this.cusRate ?? 0;
+    body.TypeShipping = this.type;
     this.params.api.forEachNode(e => {
       body.ShoesList.push({
         ShoeShippingId : 0,
@@ -249,13 +263,14 @@ export class CreateOrEditShoeSaleComponent implements OnInit {
       });
       body.TotalPrice = this.totalPrice;
     });
-    this._shoesShippigService.shippingShoes(body).pipe(finalize(() => this.refresh())).subscribe(res => {
-      alertify.success('Thêm mới thành công');
-      this.exportToExcel();
-      this.modal.hide();
-      this.modalSave.emit(null);
-    });
-    console.log(body);
+      this._shoesShippigService.shippingShoes(body).pipe(finalize(() => this.refresh())).subscribe(res => {
+        alertify.success('Thêm mới thành công');
+        this.exportToExcel();
+        this.modal.hide();
+        this.modalSave.emit(null);
+      });
+      console.log(body);
+
    }
 
   calculateFooter(){
@@ -275,4 +290,13 @@ export class CreateOrEditShoeSaleComponent implements OnInit {
     this.params.api.exportDataAsCsv();
   }
 
+  getShop() {
+    var cus = new GetShoeInfoInput();
+    this._shoehShopService.getShoeShop(cus).subscribe((res) => {
+      this.shopList = res;
+      this.shopList.map(e =>
+        this.cbbShopList.push({value: e.Id, label: e.ShopName})
+      )
+    });
+  }
 }

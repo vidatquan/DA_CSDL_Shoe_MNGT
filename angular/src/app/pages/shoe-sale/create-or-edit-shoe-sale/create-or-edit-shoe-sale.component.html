@@ -12,11 +12,24 @@
             </div>
 
             <div class="modal-body mt-1">
-                <h6 class="card-header">
-                    {{ "Thông tin KH" }}
-                </h6>
-
-                <div class="row">
+              <div class="row mb-3">
+                <!-- <div class="col-3">
+                  <h6 class="card-header">
+                      {{ "Thông tin KH" }}
+                  </h6>
+                </div> -->
+                <div class="col-3">
+                  <tmss-combobox [isRequired]="true" [text]="'Hình thức'" [(ngModel)]="type" [items]="typeList"></tmss-combobox>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-3">
+                  <h6 class="card-header">
+                      {{ "Thông tin KH" }}
+                  </h6>
+                </div>
+              </div>
+                <div class="row" *ngIf="type == 0">
                     <div class="col-3">
                         <tmss-text-input [disabled]="true" [text]="'Tên KH'" [(ngModel)]="customer.CusName" ></tmss-text-input>
                     </div>
@@ -30,6 +43,15 @@
                         <tmss-text-input [disabled]="true" [text]="'Giảm giá'" [(ngModel)]="cusRate"></tmss-text-input>
                     </div>
                 </div>
+
+                <div class="row" *ngIf="type == 1">
+                  <div class="col-6">
+                    <tmss-combobox [isRequired]="true" [text]="'Cửa hàng'" [(ngModel)]="shopId" [items]="cbbShopList"></tmss-combobox>
+                  </div>
+                  <div class="col-6">
+                      <tmss-text-input [disabled]="true" [text]="'Giảm giá'" [(ngModel)]="cusRate"></tmss-text-input>
+                  </div>
+              </div>
 
                 <div class="ui-g-12 text-right mt-1">
                     <button class="tmss-btn btn-outline-primary mr-2 mt-1 col-2" (click)="add()">
@@ -64,7 +86,7 @@
                     <div class="col-12">
                         <grid-table [columnDefs]="columnsDef" [defaultColDef]="defaultColDef" [rowData]="pagedRowData"
                             (callBackEvent)="callBackEvent($event)" [height]="'312px'" [showPagination]="false"
-                            (onChangeSelection)="onChangeSelection($event)" 
+                            (onChangeSelection)="onChangeSelection($event)"
                             (onSearch)="searchShoe($event)" (cellEditingStopped)="cellEditingStoppedShoe($event)">
                         </grid-table>
                     </div>

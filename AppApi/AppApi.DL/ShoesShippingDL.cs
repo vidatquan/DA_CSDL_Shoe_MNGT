@@ -120,7 +120,7 @@ namespace AppApi.DL
             input.ShippingNo = "DH" + input.ShippingDate.Year.ToString().Substring(2, 2) + input.ShippingDate.Month.ToString("00") + input.ShippingDate.Day.ToString("00") + input.ShippingDate.Hour.ToString("00") + input.ShippingDate.Minute.ToString("00") + input.ShippingDate.Second.ToString("00");
             //tạo thông tin của đơn hàng 
             _conn.Open();
-            string SQL = string.Format("INSERT INTO dbo.shoeshipping(shippinguser, shippingno, shippingdate,totalprice,cusid,salesMan, status, cusrate) VALUES (@ShippingUser, @ShippingNo, @ShippingDate,@TotalPrice,@CusId,@SalesMan, 0, @CusRate)");
+            string SQL = string.Format("INSERT INTO dbo.shoeshipping(shippinguser, shippingno, shippingdate,totalprice,cusid,salesMan, status, cusrate, TypeShipping) VALUES (@ShippingUser, @ShippingNo, @ShippingDate,@TotalPrice,@CusId,@SalesMan, 0, @CusRate, @TypeShipping)");
             SqlCommand sqlCommand = new SqlCommand(SQL, _conn);
             sqlCommand.Parameters.AddWithValue("@ShippingUser", input.ShippingUser);
             sqlCommand.Parameters.AddWithValue("@ShippingNo", input.ShippingNo);
@@ -128,6 +128,7 @@ namespace AppApi.DL
             sqlCommand.Parameters.AddWithValue("@CusId", input.CusId);
             sqlCommand.Parameters.AddWithValue("@CusRate", input.CusRate);
             sqlCommand.Parameters.AddWithValue("@SalesMan", input.SalesMan);
+            sqlCommand.Parameters.AddWithValue("@TypeShipping", input.TypeShipping);
             if (input.ShippingDate != null)
             {
                 sqlCommand.Parameters.AddWithValue("@ShippingDate", input.ShippingDate);
@@ -158,6 +159,20 @@ namespace AppApi.DL
             {
                 #region --lưu thông tin chi tiết của đơn hàng
                 _conn.Open();
+                if(input.TypeShipping == 1)
+                {
+                    string SQL6 = string.Format("UpdateShoesForShoes");
+                    SqlCommand sqlCommand6 = new SqlCommand(SQL6, _conn);
+
+                    sqlCommand6.Parameters.AddWithValue("@ShoeId", inp.ShoeId);
+                    sqlCommand6.Parameters.AddWithValue("@ShopId", input.CusId);
+                    sqlCommand6.Parameters.AddWithValue("@Qty", inp.ShipQty);
+                    sqlCommand6.CommandType = CommandType.StoredProcedure;
+                    sqlCommand6.ExecuteNonQuery();
+                    _conn.Close();
+                }
+                _conn.Open();
+
                 string SQL2 = string.Format("INSERT INTO dbo.shoeshippingdetail(shoeshippingid, shoesid, shipqty, price) VALUES (@ShoeShippingId,@ShoesId,@ShipQty,@Price)");
 
                 SqlCommand sqlCommand2 = new SqlCommand(SQL2, _conn);

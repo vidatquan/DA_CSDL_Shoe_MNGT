@@ -84,3 +84,42 @@ BEGIN
 	and @ShopId = -1 or ShopId = @ShopId
 	ORDER BY s.ID
 END
+
+alter table shoeshipping add TypeShipping int
+update shoeshipping set TypeShipping = 0;
+
+select * from shoes order by Id desc
+go
+create procedure UpdateShoesForShoes
+@ShoeId int, @ShopId int, @Qty int
+as
+begin
+	declare @Id int;
+	set @Id = (select Id from shoes where Id = @ShoeId and ShopId = @ShopId)
+	if (@Id is null)
+	begin
+		insert into shoes(
+			shoename,
+			shoecode,
+			shoeqty,
+			shoesize,
+			realprice,
+			sellprice,
+			color,
+			gender,
+			shoetype,
+			isdeleted,
+			note,
+			shoeimage, 
+			modifypricetime, 
+			ShopId) 
+		select shoename,shoecode,@Qty,shoesize,realprice,sellprice,color,gender,shoetype,isdeleted,note,shoeimage, modifypricetime, ShopId from shoes
+	end
+	else
+	begin
+		set @Qty = @Qty + (select shoeqty from shoes where Id = @ShoeId);
+		update shoes set shoeqty = @Qty where Id = @ShoeId
+	end
+end
+
+select * from shoes order by Id desc
