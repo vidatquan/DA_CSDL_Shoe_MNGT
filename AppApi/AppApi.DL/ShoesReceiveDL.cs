@@ -38,6 +38,8 @@ namespace AppApi.DL
                     receive.ReceiveUser = sqlDataReader["receiveuser"].ToString();
                     receive.ReceiveNo = sqlDataReader["receiveno"].ToString();
                     receive.OrderNo = sqlDataReader["orderno"].ToString();
+                    receive.ShopId = (int)sqlDataReader["shopid"];
+                    receive.SupplierName = sqlDataReader["SupplierName"].ToString();
                     if (!Convert.IsDBNull(sqlDataReader["receivedate"]))
                     {
                         receive.ReceiveDate = Convert.ToDateTime(sqlDataReader["receivedate"]);
@@ -98,11 +100,13 @@ namespace AppApi.DL
             input.ReceiveNo = "PGH" + date.Year.ToString().Substring(2, 2) + date.Month.ToString("00") + date.Day.ToString("00") + date.Hour.ToString("00") + date.Minute.ToString("00") + date.Second.ToString("00");
             #region --tạo thông tin của đơn hàng 
             _conn.Open();
-            string SQL = string.Format("INSERT INTO dbo.shoereceive(receiveuser, receiveno, orderno, receivedate) VALUES (@ReceiveUser, @ReceiveNo, @OrderNo, @ReceiveDate)");
+            string SQL = string.Format("INSERT INTO dbo.shoereceive(receiveuser, receiveno, orderno, receivedate,shopid, SupplierName) VALUES (@ReceiveUser, @ReceiveNo, @OrderNo, @ReceiveDate,@ShopId, @SupplierName)");
             SqlCommand sqlCommand = new SqlCommand(SQL, _conn);
             sqlCommand.Parameters.AddWithValue("@ReceiveUser", input.ReceiveUser);
             sqlCommand.Parameters.AddWithValue("@ReceiveNo", input.ReceiveNo);
             sqlCommand.Parameters.AddWithValue("@OrderNo", input.OrderNo);
+            sqlCommand.Parameters.AddWithValue("@ShopId", input.ShopId);
+            sqlCommand.Parameters.AddWithValue("@SupplierName", input.SupplierName);
             if (input.ReceiveDate != null)
             {
                 sqlCommand.Parameters.AddWithValue("@ReceiveDate", input.ReceiveDate);

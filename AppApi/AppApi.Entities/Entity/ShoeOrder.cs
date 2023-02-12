@@ -13,5 +13,8 @@ namespace AppApi.Entities.Entity
         public string OrderUser { get; set; }
         public string OrderNo { get; set; }
         public int OrderStatus { get; set; }
+        public string SupplierName { get; set; }
+        public int ShopId { get; set; }
+
     }
 }

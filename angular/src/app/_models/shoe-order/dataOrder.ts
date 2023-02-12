@@ -6,5 +6,6 @@ export class DataOrder {
     OrderNo: string;
     OrderDate: Moment | null;
     ShoesList: ShoeOrderDetailDto[];
+    ShopId : number;
+    SupplierName : string;
   }
-  

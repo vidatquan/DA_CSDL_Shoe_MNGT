@@ -137,3 +137,33 @@ END
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
+select * from shoeorder
+select * from shoeorderdetail
+update shoeorder set orderstatus = 1 where id = 3010
+----------
+select * from shoereceive
+select * from shoereceivedetail
+----------
+
+alter table shoeorder add ShopId int 
+alter table shoeorder add SupplierName nvarchar(max) null 
+
+alter table shoereceive add ShopId int 
+alter table shoereceive add SupplierName nvarchar(max) null 
+update shoeorder set ShopId = 1 
+update shoereceive set ShopId = 1 
+update shoeorder set SupplierName = 'TNHH'
+update shoereceive set SupplierName = 'TNHH'
+select * from shoes
+--
+select * from shoeorder
+select * from shoeorderdetail
+select * from shoereceive
+
+delete  shoeorder
+delete shoereceivedetail
+
+UPDATE shoeorder set orderstatus = 1 
+
+
+

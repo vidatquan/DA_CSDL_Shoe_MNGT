@@ -78,6 +78,10 @@ export class ShoeOrderComponent implements OnInit {
         field: 'OrderUser',
       },
       {
+        headerName: 'Nhà cung cấp',
+        field: 'SupplierName',
+      },
+      {
         headerName: 'Trạng thái',
         field: 'OrderStatus',
         valueFormatter: (param) => this.statusList.find(e => e.value == param.data.OrderStatus)?.label,
@@ -178,7 +182,8 @@ export class ShoeOrderComponent implements OnInit {
     order.FromDate = this.fromDate ?? null;
     order.ToDate = this.toDate ?? null;
     this._shoesOrderService.getShoesOrder(order).subscribe((res) => {
-      this.rowData = res;
+      console.log(res);
+      this.rowData = res.filter(e => e.ShopId == this.user?.ShopId);
       this.pagedRowData =
         this.rowData.length > 0
           ? this.rowData.slice(

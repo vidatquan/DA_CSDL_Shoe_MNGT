@@ -84,7 +84,7 @@ BEGIN
 	and @ShopId = -1 or ShopId = @ShopId
 	ORDER BY s.ID
 END
-
+-----------
 alter table shoeshipping add TypeShipping int
 update shoeshipping set TypeShipping = 0;
 

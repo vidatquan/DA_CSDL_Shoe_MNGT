@@ -9,4 +9,6 @@ export class SaveReceiveShoeDto {
     ReceiveDate: Moment | null;
     ShoesList: ShoeReceiveDetailDto[];
     CheckShoeOrderComplete: number; // kiểm tra đơn hàng đã nhận được hết hay chưa
+    ShopId : number;
+    SupplierName : string;
   }

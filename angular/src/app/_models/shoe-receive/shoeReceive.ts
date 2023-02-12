@@ -6,4 +6,6 @@ export class ShoeReceive {
     ReceiveNo:string;
     OrderNo: string;
     ReceiveDate: Moment | null;
+    ShopId : number;
+    SupplierName : string;
   }

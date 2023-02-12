@@ -21,6 +21,7 @@ export class ShoeReceiveModalComponent implements OnInit {
   @Input() orderNo: any;
   @Input() orderDate: any;
   @Input() orderId : any;
+  @Input() SupplierName: any;
 
   columnsDef;
   defaultColDef;
@@ -115,6 +116,7 @@ export class ShoeReceiveModalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   callBackEvent(event) {
@@ -139,7 +141,7 @@ export class ShoeReceiveModalComponent implements OnInit {
     this.totalPrice = 0;
     this.check = false;
 
-    this.getListReceive();
+    //this.getListReceive();
     this.selectedData = undefined;
     this.fullName = JSON.parse(localStorage.getItem('currentUser'))?.FullName;
     this.pagedRowData = this.orderDetailList;
@@ -156,15 +158,17 @@ export class ShoeReceiveModalComponent implements OnInit {
       body.OrderNo = this.orderNo;
       body.ReceiveDate = this.receiveDate;
       body.ShoesList = [];
+      body.ShopId = this.user.ShopId;
+      body.SupplierName = this.SupplierName;
       this.params.api.forEachNode(e => {
         body.ShoesList.push({
           ShoeReceiveId : 0,
           ShoeId : e.data.ShoeId,
           OrderQty: e.data.OrderQty, // sl đặt
-          DeliveryQty : e.data.DeliveryQty, // số lượng giao 
+          DeliveryQty : e.data.DeliveryQty, // số lượng giao
           ReceiveQty : e.data.ReceiveActualQty, // số lượng thực nhận
           ShoeReceivedQtyInStock : Number(e.data.ReceiveActQty) + Number(e.data.ReceiveActualQty), // số lượng đã nhận ở trong kho
-          // SL đặt - SL đã nhận - số lượng thực nhận > 0 => chưa nhận đủ  
+          // SL đặt - SL đã nhận - số lượng thực nhận > 0 => chưa nhận đủ
           CheckReceiveComplete : Number(e.data.OrderQty) - Number(e.data.ReceiveActQty) - Number(e.data.ReceiveActualQty) > 0 ? 0 : 1,
           Price: e.data.Price
         });
@@ -244,7 +248,7 @@ export class ShoeReceiveModalComponent implements OnInit {
     //   return false;
     // };
 
-    
+
 
     return true;
   }
@@ -253,15 +257,15 @@ export class ShoeReceiveModalComponent implements OnInit {
     this.params.api.exportDataAsCsv();
   }
 
-  getListReceive(){
-    var receive = new GetShoeReceiveInput();
-    receive.ReceiveNo = '';
-    receive.FromDate =  moment("1999-01-01");
-    receive.ToDate =  moment("2222-01-01");
-    this._shoeReceiveService.getShoesReceive(receive).subscribe((res) => {
-      this.receiveList = res;
-    });
-  }
+  // getListReceive(){
+  //   var receive = new GetShoeReceiveInput();
+  //   receive.ReceiveNo = '';
+  //   receive.FromDate =  moment("1999-01-01");
+  //   receive.ToDate =  moment("2222-01-01");
+  //   this._shoeReceiveService.getShoesReceive(receive).subscribe((res) => {
+  //     this.receiveList = res;
+  //   });
+  // }
 
   calculateFooter(){
     this.preTaxPrice = 0;

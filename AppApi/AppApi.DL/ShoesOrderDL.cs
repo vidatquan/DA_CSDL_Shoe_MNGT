@@ -38,6 +38,8 @@ namespace AppApi.DL
                     order.Id = (int)sqlDataReader["id"];
                     order.OrderUser = sqlDataReader["orderuser"].ToString();
                     order.OrderNo = sqlDataReader["orderno"].ToString();
+                    order.ShopId = (int)sqlDataReader["shopid"];
+                    order.SupplierName = sqlDataReader["SupplierName"].ToString();
                     if (!Convert.IsDBNull(sqlDataReader["orderdate"]))
                     {
                         order.OrderDate = Convert.ToDateTime(sqlDataReader["orderdate"]);
@@ -104,10 +106,12 @@ namespace AppApi.DL
 
             input.OrderNo = "DH" + input.OrderDate.Year.ToString().Substring(2, 2) + input.OrderDate.Month.ToString("00") + input.OrderDate.Day.ToString("00") + input.OrderDate.Hour.ToString("00")+ input.OrderDate.Minute.ToString("00")+ input.OrderDate.Second.ToString("00");
             _conn.Open();
-            string SQL = string.Format("INSERT INTO dbo.shoeorder(orderuser, orderno, orderdate,orderstatus) VALUES (@OrderUser,@OrderNo,@OrderDate,0)");
+            string SQL = string.Format("INSERT INTO dbo.shoeorder(orderuser, orderno, orderdate,orderstatus,shopid, SupplierName) VALUES (@OrderUser,@OrderNo,@OrderDate,0,@ShopId, @SupplierName)");
             SqlCommand sqlCommand = new SqlCommand(SQL, _conn);
             sqlCommand.Parameters.AddWithValue("@OrderUser", input.OrderUser);
             sqlCommand.Parameters.AddWithValue("@OrderNo", input.OrderNo);
+            sqlCommand.Parameters.AddWithValue("@ShopId", input.ShopId); 
+            sqlCommand.Parameters.AddWithValue("@SupplierName", input.SupplierName); 
             if (input.OrderDate != null)
             {
                 sqlCommand.Parameters.AddWithValue("@OrderDate", input.OrderDate);

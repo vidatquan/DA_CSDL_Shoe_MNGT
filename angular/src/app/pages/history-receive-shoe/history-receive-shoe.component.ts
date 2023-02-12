@@ -61,6 +61,10 @@ export class HistoryReceiveShoeComponent implements OnInit {
         field: 'ReceiveDate',
         valueFormatter: (param) => this._dataFormatService.dateTimeFormat(param.data.ReceiveDate)
       },
+      {
+        headerName: 'Nhà cung cấp',
+        field: 'SupplierName',
+      },
     ];
 
     this.orderDetailcolumnsDef = [
@@ -145,7 +149,7 @@ export class HistoryReceiveShoeComponent implements OnInit {
     receive.FromDate = this.fromDate ?? null;
     receive.ToDate = this.toDate ?? null;
     this._shoesReceiveService.getShoesReceive(receive).subscribe((res) => {
-      this.rowData = res;
+      this.rowData = res.filter(e => e.ShopId == this.user?.ShopId);
       this.pagedRowData =
         this.rowData.length > 0
           ? this.rowData.slice(

@@ -6,5 +6,6 @@ export class ShoeOrder {
     OrderNo: string;
     OrderDate: Moment | null;
     OrderStatus : number;
+    ShopId : number;
+    SupplierName : string;
   }
-  

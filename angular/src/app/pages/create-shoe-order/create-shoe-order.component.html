@@ -10,6 +10,12 @@
       <div class="col-3">
         <tmss-text-input [disabled]="true" [text]="'Ngày đặt hàng'" [(ngModel)]="orderDateFormat"></tmss-text-input>
       </div>
+      <div class="col-3">
+        <tmss-combobox [isRequired]="true" [text]="'Nhà cung cấp'" [(ngModel)]="supplierId" [items]="supplierList"></tmss-combobox>
+      </div>
+      <!-- <div class="col-3">
+        <tmss-text-input [disabled]="true" [text]="'Nhà cung cấp'" [(ngModel)]="orderDateFormat"></tmss-text-input>
+      </div> -->
       <div class="col-6 text-right">
         <button class="tmss-btn btn-outline-primary mr-2 mt-1 col-2" (click)="add()">
           <i class="fa tmss-fa fa-plus"></i>

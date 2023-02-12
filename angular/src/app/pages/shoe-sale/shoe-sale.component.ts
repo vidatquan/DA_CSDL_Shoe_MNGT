@@ -169,7 +169,7 @@ export class ShoeSaleComponent implements OnInit {
    shipping.CusName = this.cusNameFilter ?? '';
    shipping.CusTel = this.cusTelFilter ?? '';
     this._shoesShippigService.getShoesShipping(shipping).subscribe((res) => {
-      this.rowData = res;
+      this.rowData = res.filter(e => e.ShopId == this.user?.ShopId);
       this.pagedRowData =
         this.rowData.length > 0
           ? this.rowData.slice(
@@ -205,7 +205,7 @@ export class ShoeSaleComponent implements OnInit {
 
   onChangeSelection(params) {
     const selectedData = params.api.getSelectedRows();
-    if (selectedData){ 
+    if (selectedData){
     this.selectedData = Object.assign({},selectedData[0]);
     this.cusAdd = this.selectedData.CusAdd;
     this.cusName = this.selectedData.ShippingUser;

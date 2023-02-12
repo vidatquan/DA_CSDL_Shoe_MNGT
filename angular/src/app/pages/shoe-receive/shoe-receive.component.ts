@@ -98,7 +98,11 @@ export class ShoeReceiveComponent implements OnInit {
       {
         headerName: 'Người đặt hàng',
         field: 'OrderUser',
-      }
+      },
+      {
+        headerName: 'Nhà cung cấp',
+        field: 'SupplierName',
+      },
     ];
 
     this.orderDetailcolumnsDef = [
@@ -168,7 +172,7 @@ export class ShoeReceiveComponent implements OnInit {
   onSearch(paginationParams: PaginationParamsModel) {
     this.selectedData = undefined;
     this.orderDetailList = [];
-    
+
     this.paginationParams = paginationParams;
     var order = new GetShoeOrdersInput();
     order.OrderNo = this.orderNoFilter ?? '';
@@ -176,7 +180,7 @@ export class ShoeReceiveComponent implements OnInit {
     order.FromDate = this.orderDate ?? null;
     order.ToDate = this.orderDate ?? null;
     this._shoesOrderService.getShoesOrder(order).subscribe((res) => {
-      this.rowData = res;
+      this.rowData = res.filter(e => e.ShopId == this.user?.ShopId);
       this.pagedRowData =
         this.rowData.length > 0
           ? this.rowData.slice(

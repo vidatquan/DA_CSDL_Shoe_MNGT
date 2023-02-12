@@ -14,6 +14,8 @@ import { ICellEditor, ICellEditorParams } from 'ag-grid-community';
 import { GridTableService } from 'src/app/_services/grid-table.service';
 import { DataOrder } from 'src/app/_models/shoe-order/dataOrder';
 import { ShoesOrderService } from 'src/app/_services/shoe-order.service';
+import { ShoeSupplierService } from 'src/app/_services/shoe-supplier.service';
+import { GetCusInputDto } from 'src/app/_models/get-cus-input-dto';
 declare let alertify: any;
 
 @Component({
@@ -41,12 +43,20 @@ export class CreateShoeOrderComponent implements OnInit {
   confirmOrder = false;
   shoeList = [];
   selectedNode: any;
+  typeOrderList = [
+    //{value: -1 , label : "Tất cả"},
+    {value: 0 , label : "Đặt ngoài"},
+    {value: 1 , label : "Đặt nội bộ"},
+  ]
+  supplierList = [];
+  supplierId = -1;
 
   constructor(
     private _shoeOrderService: ShoesOrderService,
     private _dataFormatService: DataFormatService,
     private _shoesService: ShoesService,
-    private _gridTableServcie: GridTableService) {
+    private _gridTableServcie: GridTableService,
+    private _shoeSupplierService: ShoeSupplierService) {
     this.columnsDef = [
       {
         headerName: 'STT',
@@ -112,8 +122,17 @@ export class CreateShoeOrderComponent implements OnInit {
     this.fullName = this.user.FullName;
     this.orderDate = moment();
     this.orderDateFormat = this._dataFormatService.dateTimeFormat(this.orderDate);
+    this.getSupplierList();
   }
 
+  getSupplierList(){
+    var cus = new GetCusInputDto();
+    cus.CusName =  '';
+    cus.CusTel = '';
+    this._shoeSupplierService.getCustomers(cus).subscribe((res) => {
+      res.map(e => this.supplierList.push({value:e.Id, label:e.SupplierName}));
+    });
+  }
   callBackEvent(event) {
     this.params = event;
   }
@@ -146,7 +165,7 @@ export class CreateShoeOrderComponent implements OnInit {
     // if(params?.colDef?.field == 'ShoeCode'){
     //   this.shoeInfoModal.show(params.newValue);
     // }
-    
+
   }
 
   onChangeSelection(params) {
@@ -192,6 +211,7 @@ export class CreateShoeOrderComponent implements OnInit {
   }
 
   confirm() {
+    if(this.supplierId == -1) return alertify.error('Nhà cung cấp không được trống');
     var check = false;
     if(this.params.api.getDisplayedRowCount()  <= 0) return alertify.error('Danh sách đặt hàng không hợp lệ');
     this.params.api.forEachNode(e => {
@@ -208,8 +228,10 @@ export class CreateShoeOrderComponent implements OnInit {
     var body = new DataOrder();
     body.OrderUser = this.fullName;
     body.OrderDate = this.orderDate;
-    body.OrderNo = ''; 
+    body.OrderNo = '';
     body.ShoesList = [];
+    body.ShopId = this.user.ShopId;
+    body.SupplierName = this.supplierList.find(e => e.value == this.supplierId)?.label;
     this.params.api.forEachNode(e => {
       body.ShoesList.push({
         ShoeOrderId : 0,

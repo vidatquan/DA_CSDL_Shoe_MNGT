@@ -50,12 +50,14 @@
     </div>
 </div>
 
-<app-shoe-receive-modal 
+<app-shoe-receive-modal
   #shoeReceiveModal
-   [orderId]="selectedData?.Id" 
-   [orderDate]="selectedData?.OrderDate" 
-   [orderNo]="selectedData?.OrderNo" 
+   [orderId]="selectedData?.Id"
+   [orderDate]="selectedData?.OrderDate"
+   [orderNo]="selectedData?.OrderNo"
+   [orderNo]="selectedData?.OrderNo"
    [orderDetailList]="orderDetailList"
+   [SupplierName]="selectedData?.SupplierName"
    (modalSave)="onGridReady(paginationParams)" >
 </app-shoe-receive-modal>
 

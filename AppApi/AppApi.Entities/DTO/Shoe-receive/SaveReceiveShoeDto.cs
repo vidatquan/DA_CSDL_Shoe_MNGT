@@ -12,6 +12,8 @@ namespace AppApi.Entities.DTO.Shoe_receive
         public string ReceiveUser { get; set; }
         public string ReceiveNo { get; set; }
         public string OrderNo { get; set; }
+        public string SupplierName { get; set; }
+        public int ShopId { get; set; }
         public DateTime ReceiveDate { get; set; }
         public List<ShoeReceiveDetailDto> ShoesList { get; set; }
         public int CheckShoeOrderComplete { get; set; } // kiểm tra đơn hàng đã nhận được hết hay chưa
