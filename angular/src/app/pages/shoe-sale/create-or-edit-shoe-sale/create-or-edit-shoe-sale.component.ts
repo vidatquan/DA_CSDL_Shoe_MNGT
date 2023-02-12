@@ -126,7 +126,7 @@ export class CreateOrEditShoeSaleComponent implements OnInit {
     this.customer = new Customer();
     this.rowData = [];
     this.getShop()
-
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   show(){
@@ -254,6 +254,7 @@ export class CreateOrEditShoeSaleComponent implements OnInit {
     body.TotalPrice = 0;
     body.CusRate = this.cusRate ?? 0;
     body.TypeShipping = this.type;
+    body.ShopId = this.user.ShopId;
     this.params.api.forEachNode(e => {
       body.ShoesList.push({
         ShoeShippingId : 0,

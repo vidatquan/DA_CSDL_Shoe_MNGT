@@ -13,5 +13,6 @@ namespace AppApi.Entities.DTO.Shoe_shipping
         public string ShippingNo { get; set; }
         public string CusName { get; set; }
         public string CusTel { get; set; }
+        public int ShopId { get; set; }
     }
 }

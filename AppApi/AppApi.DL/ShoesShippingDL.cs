@@ -31,6 +31,7 @@ namespace AppApi.DL
             cmd.Parameters.AddWithValue("@ToDate", input.ToDate);
             cmd.Parameters.AddWithValue("@CusTel", input.CusTel);
             cmd.Parameters.AddWithValue("@CusName", input.CusName);
+            cmd.Parameters.AddWithValue("@ShopId", input.ShopId);
 
             cmd.CommandType = CommandType.StoredProcedure;
             SqlDataReader sqlDataReader = cmd.ExecuteReader();
@@ -120,7 +121,7 @@ namespace AppApi.DL
             input.ShippingNo = "DH" + input.ShippingDate.Year.ToString().Substring(2, 2) + input.ShippingDate.Month.ToString("00") + input.ShippingDate.Day.ToString("00") + input.ShippingDate.Hour.ToString("00") + input.ShippingDate.Minute.ToString("00") + input.ShippingDate.Second.ToString("00");
             //tạo thông tin của đơn hàng 
             _conn.Open();
-            string SQL = string.Format("INSERT INTO dbo.shoeshipping(shippinguser, shippingno, shippingdate,totalprice,cusid,salesMan, status, cusrate, TypeShipping) VALUES (@ShippingUser, @ShippingNo, @ShippingDate,@TotalPrice,@CusId,@SalesMan, 0, @CusRate, @TypeShipping)");
+            string SQL = string.Format("INSERT INTO dbo.shoeshipping(shippinguser, shippingno, shippingdate,totalprice,cusid,salesMan, status, cusrate, TypeShipping, ShopId) VALUES (@ShippingUser, @ShippingNo, @ShippingDate,@TotalPrice,@CusId,@SalesMan, 0, @CusRate, @TypeShipping, @ShopId)");
             SqlCommand sqlCommand = new SqlCommand(SQL, _conn);
             sqlCommand.Parameters.AddWithValue("@ShippingUser", input.ShippingUser);
             sqlCommand.Parameters.AddWithValue("@ShippingNo", input.ShippingNo);
@@ -129,6 +130,7 @@ namespace AppApi.DL
             sqlCommand.Parameters.AddWithValue("@CusRate", input.CusRate);
             sqlCommand.Parameters.AddWithValue("@SalesMan", input.SalesMan);
             sqlCommand.Parameters.AddWithValue("@TypeShipping", input.TypeShipping);
+            sqlCommand.Parameters.AddWithValue("@ShopId", input.ShopId);
             if (input.ShippingDate != null)
             {
                 sqlCommand.Parameters.AddWithValue("@ShippingDate", input.ShippingDate);

@@ -6,4 +6,5 @@ export class GetShoeShippingInputDto {
     ShippingNo: string;
     CusName:string;
     CusTel:string;
+    ShopId:number;
   }

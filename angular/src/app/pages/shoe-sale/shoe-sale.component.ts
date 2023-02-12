@@ -168,6 +168,7 @@ export class ShoeSaleComponent implements OnInit {
    shipping.ToDate = this.toDate ?? null;
    shipping.CusName = this.cusNameFilter ?? '';
    shipping.CusTel = this.cusTelFilter ?? '';
+   shipping.ShopId = this.user.ShopId ?? '';
     this._shoesShippigService.getShoesShipping(shipping).subscribe((res) => {
       this.rowData = res.filter(e => e.ShopId == this.user?.ShopId);
       this.pagedRowData =

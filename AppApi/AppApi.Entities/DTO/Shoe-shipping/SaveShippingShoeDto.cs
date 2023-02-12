@@ -19,6 +19,7 @@ namespace AppApi.Entities.DTO.Shoe_shipping
             public string SalesMan { get; set; }
             public string Note { get; set; }
             public int TypeShipping { get; set; }
+            public int ShopId { get; set; }
         public List<ShoeShippingDetailDto> ShoesList { get; set; }
     }
 }

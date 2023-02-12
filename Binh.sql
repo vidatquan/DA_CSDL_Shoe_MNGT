@@ -121,7 +121,51 @@ begin
 		update shoes set shoeqty = @Qty where Id = @ShoeId
 	end
 end
-
+----------11:59---------------------------------------------------------------------------------------
 select * from shoes order by Id desc
 select * from users
 select * from Shop
+select * from shoeshipping
+alter table shoeshipping add ShopId int
+update shoeshipping set ShopId = 1
+
+ALTER PROCEDURE [dbo].[GetShoeShipping]
+	@FromDate date null,
+	@ToDate date null,
+	@ShippingNo nvarchar(max) null,
+	@CusTel nvarchar(max) null,
+	@CusName nvarchar(max) null,
+	@ShopId int 
+AS
+BEGIN
+    SELECT 
+	o.id,
+	o.shippinguser,
+	o.shippingno,
+	o.shippingdate,
+	--Status,
+	o.totalprice,
+	o.cusid,
+	o.cusrate,
+	--o.cusname
+	c.cus_tel custel,
+	c.cus_add cusadd,
+	c.shoebuyprice,
+	o.salesman
+	--Note,
+
+	FROM shoeshipping o inner join customer c on o.cusid = c.id
+	WHERE (@ShippingNo = '' OR @ShippingNo IS NULL OR o.shippingno LIKE '%' + @ShippingNo + '%')
+	AND (@CusTel = '' OR @CusTel IS NULL OR c.cus_tel LIKE '%' + @CusTel + '%')
+	AND (@CusName = '' OR @CusName IS NULL OR c.cus_name LIKE '%' + @CusName + '%')
+	And (o.status = 0)
+	and cast (o.shippingdate as date) between cast (@FromDate as date) and cast (@ToDate as date)
+	and ShopId = @ShopId
+	ORDER BY o.shippingdate desc
+END
+
+declare @FromDate1 datetime2, @ToDate1 datetime2
+set @FromDate1 = '2023-02-12 00:20:34.563';
+set @ToDate1 = getdate();
+exec [GetShoeShipping] @FromDate1 , @ToDate1, null, null, null, 1
+

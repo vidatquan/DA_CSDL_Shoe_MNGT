@@ -13,5 +13,6 @@ export class SaveShippingShoeDto {
     Note:number;
     CusRate:number;
     TypeShipping:number;
+    ShopId:number;
     ShoesList: ShoeShippingDetailDto[];
   }
