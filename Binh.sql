@@ -135,7 +135,7 @@ ALTER PROCEDURE [dbo].[GetShoeShipping]
 	@ShippingNo nvarchar(max) null,
 	@CusTel nvarchar(max) null,
 	@CusName nvarchar(max) null,
-	@ShopId int 
+	@ShopId int
 AS
 BEGIN
     SELECT 
@@ -153,11 +153,33 @@ BEGIN
 	c.shoebuyprice,
 	o.salesman
 	--Note,
-
-	FROM shoeshipping o inner join customer c on o.cusid = c.id
+	FROM shoeshipping o 
+	inner join customer c on o.cusid = c.id and o.TypeShipping = 0
 	WHERE (@ShippingNo = '' OR @ShippingNo IS NULL OR o.shippingno LIKE '%' + @ShippingNo + '%')
 	AND (@CusTel = '' OR @CusTel IS NULL OR c.cus_tel LIKE '%' + @CusTel + '%')
 	AND (@CusName = '' OR @CusName IS NULL OR c.cus_name LIKE '%' + @CusName + '%')
+	And (o.status = 0)
+	and cast (o.shippingdate as date) between cast (@FromDate as date) and cast (@ToDate as date)
+	--and ShopId = @ShopId
+	union all
+	SELECT 
+	o.id,
+	o.shippinguser,
+	o.shippingno,
+	o.shippingdate,
+	--Status,
+	o.totalprice,
+	o.cusid,
+	o.cusrate,
+	--o.cusname
+	'0321234567' custel,
+	c.shopname cusadd,
+	10000000 shoebuyprice,
+	o.salesman
+	--Note,
+	FROM shoeshipping o 
+	inner join Shop c on o.cusid = c.id and o.TypeShipping = 1
+	WHERE (@ShippingNo = '' OR @ShippingNo IS NULL OR o.shippingno LIKE '%' + @ShippingNo + '%')
 	And (o.status = 0)
 	and cast (o.shippingdate as date) between cast (@FromDate as date) and cast (@ToDate as date)
 	and ShopId = @ShopId
@@ -165,7 +187,7 @@ BEGIN
 END
 
 declare @FromDate1 datetime2, @ToDate1 datetime2
-set @FromDate1 = '2023-02-12 00:20:34.563';
+set @FromDate1 = '2022-02-12 00:20:34.563';
 set @ToDate1 = getdate();
 exec [GetShoeShipping] @FromDate1 , @ToDate1, null, null, null, 1
 
