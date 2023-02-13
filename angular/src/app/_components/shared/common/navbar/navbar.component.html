@@ -40,13 +40,13 @@
           <span class="nav-text"> Nhân viên </span>
         </a>
       </li>
-      <li>
+      <li *ngIf="currentUser.RoleId == 1">
         <a routerLink="shoe-shop">
           <i class="fa fa-bank fa-2x"></i>
           <span class="nav-text"> {{"Quản lý cửa hàng giày"}} </span>
         </a>
       </li>
-      <li>
+      <li *ngIf="currentUser.RoleId == 1">
         <a routerLink="shoe-supplier">
           <i class="fa fa-cubes fa-2x"></i>
           <span class="nav-text"> {{"Quản lý nhà cung cấp"}} </span>
@@ -93,7 +93,7 @@
         </a>
       </li> -->
 
-      <li>
+      <li *ngIf="currentUser.RoleId == 2">
         <a (click)="check(1)">
           <i class="fa fa-shopping-cart  fa-2x"></i>
           <span class="nav-text"> Đặt hàng </span>
@@ -114,7 +114,7 @@
         </a>
       </li>
 
-      <li>
+      <li *ngIf="currentUser.RoleId == 2">
         <a (click)="check(2)">
           <i class="fa fa-check-square-o fa-2x"></i>
           <span class="nav-text"> Nhận hàng </span>
@@ -155,14 +155,14 @@
           <span class="nav-text"> Lịch sử giá phụ tùng</span>
         </a>
       </li> -->
-      <li >
+      <li *ngIf="currentUser.RoleId == 3">
         <a routerLink="shoe-sale">
           <i class="fa fa-money fa-2x"></i>
           <span class="nav-text"> Bán giày</span>
         </a>
       </li>
 
-      <li>
+      <li *ngIf="currentUser.RoleId == 2">
         <a (click)="check(4)">
           <i class="fa fa-line-chart  fa-2x"></i>
           <span class="nav-text"> Báo cáo </span>

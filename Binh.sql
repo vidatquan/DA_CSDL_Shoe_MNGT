@@ -94,9 +94,9 @@ create or alter procedure UpdateShoesForShoes
 @ShoeId int, @ShopId int, @Qty int
 as
 begin
-	declare @Id int;
-	set @Id = (select Id from shoes where Id = @ShoeId and ShopId = @ShopId)
-	if (@Id is null)
+	declare @check int; 
+	set @check = (select Id from shoes where shoecode = (select shoecode from shoes where id = @ShoeId) and ShopId = @ShopId)
+	if (NOT EXISTS (select Id from shoes where shoecode = (select shoecode from shoes where id = @ShoeId) and ShopId = @ShopId))
 	begin
 		insert into shoes(
 			shoename,
@@ -117,10 +117,12 @@ begin
 	end
 	else
 	begin
-		set @Qty = @Qty + (select shoeqty from shoes where Id = @ShoeId);
-		update shoes set shoeqty = @Qty where Id = @ShoeId
+		set @Qty = @Qty + (select shoeqty from shoes where Id = @check);
+		update shoes set shoeqty = @Qty where Id = @check
 	end
 end
+
+select * from shoes where Shopid = 5
 ----------11:59---------------------------------------------------------------------------------------
 select * from shoes order by Id desc
 select * from users
@@ -172,7 +174,7 @@ BEGIN
 	o.cusid,
 	o.cusrate,
 	--o.cusname
-	'0321234567' custel,
+	'999999999' custel,
 	c.shopname cusadd,
 	10000000 shoebuyprice,
 	o.salesman
@@ -217,3 +219,5 @@ begin
 	commit transaction;
 end;
 go
+
+select * from shoes

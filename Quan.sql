@@ -201,7 +201,11 @@ BEGIN
 	group by sh.shoename, sh.shoecode 
 	order by 3 desc
 END
+--
+select * from shoeorder
+select * from shoeorderdetail
 
+update shoeorder set orderstatus = 1 where id = 3019 
 
 
 
