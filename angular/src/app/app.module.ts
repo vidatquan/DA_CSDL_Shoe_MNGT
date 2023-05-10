@@ -47,6 +47,26 @@ import { ShoeSupplierComponent } from './pages/shoe-supplier/shoe-supplier.compo
 import { CreateOrEditShoeSupplierComponent } from './pages/shoe-supplier/create-or-edit-shoe-supplier/create-or-edit-shoe-supplier.component';
 import { ShoeShopComponent } from './pages/shoe-shop/shoe-shop.component';
 import { CreateOrEditShoeShopComponent } from './pages/shoe-shop/create-or-edit-shoe-shop/create-or-edit-shoe-shop.component';
+import { UserIntroComponent } from './pages_user/user-intro/user-intro.component';
+import { UserCartComponent } from './pages_user/user-cart/user-cart.component';
+import { UserCollectionComponent } from './pages_user/user-collection/user-collection.component';
+import { UserProductComponent } from './pages_user/user-product/user-product.component';
+import { IonicModule } from '@ionic/angular';
+import { UserMainComponent } from './pages_user/user-main/user-main.component';
+
+import { CardModule } from 'primeng/card';
+import { RouterModule } from '@angular/router';
+import { RatingModule } from 'primeng/rating';
+import {CheckboxModule} from 'primeng/checkbox';
+
+
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
+
+import { AdminMainComponent } from './pages/admin-main/admin-main.component';
+// import { CurrencyPipe } from '@angular/common';
+
 
 
 @NgModule({
@@ -83,7 +103,13 @@ import { CreateOrEditShoeShopComponent } from './pages/shoe-shop/create-or-edit-
     ShoeSupplierComponent,
     CreateOrEditShoeSupplierComponent,
     ShoeShopComponent,
-    CreateOrEditShoeShopComponent
+    CreateOrEditShoeShopComponent,
+    UserIntroComponent,
+    UserCartComponent,
+    UserCollectionComponent,
+    UserProductComponent,
+    UserMainComponent,
+    AdminMainComponent
   ],
   imports: [
     BrowserModule,
@@ -98,6 +124,16 @@ import { CreateOrEditShoeShopComponent } from './pages/shoe-shop/create-or-edit-
     ModalModule.forRoot(),
     NgxSpinnerModule,
     TabsModule.forRoot(),
+    IonicModule.forRoot(),
+
+    CardModule,
+    RouterModule,
+    RatingModule,
+    CheckboxModule,
+
+    MatPaginatorModule,
+    MatCheckboxModule,
+    // CurrencyPipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

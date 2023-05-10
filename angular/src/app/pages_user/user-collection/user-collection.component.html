@@ -1,0 +1,119 @@
+<div class="collection--wrap bg-left">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="d-none d-lg-block d-xl-block col-xl-2 col-lg-3 sidebar-collection" style="margin-top: 100px;">
+        <div style="margin-left: 20px;">
+          <!-- <ion-button color="dark"><ion-icon name="funnel-outline"></ion-icon>Khôi phục</ion-button> -->
+          <ion-button fill="outline" color="dark" style="margin-right:5px;">Tìm kiếm</ion-button>
+          <ion-button fill="outline" color="dark">Khôi phục</ion-button>
+        </div>
+        <div style="margin-left: 20px;margin-top:5px">
+          <ion-text color="dark">
+            <h5>Thương Hiệu</h5>
+          </ion-text>
+          <div style="height: 196px;width: 220px;
+          border: 2px solid #000000;border-radius: 5px;
+          overflow-y: auto;
+          overflow-x: hidden;">
+              <ion-list lines="none" >
+                <ion-item *ngFor="let type of typeList">
+                  <ion-checkbox labelPlacement="end" color="dark"> </ion-checkbox>
+                 <!-- <ion-text [(ngModel)]="type.value">{{type.label}}</ion-text> -->
+                  <ion-label style="margin-left: 5px;">{{type.label}}</ion-label>
+                </ion-item>
+              </ion-list>
+          </div>
+        </div>
+
+        <div style="margin-left: 20px;margin-top:5px">
+          <ion-text color="dark">
+            <h3>Size giày/dép</h3>
+          </ion-text>
+          <div style="height: 196px;width: 220px;
+          border: 2px solid #000000;border-radius: 5px;
+          overflow-y: auto;
+          overflow-x: hidden;">
+              <ion-list lines="none" >
+                <ion-item *ngFor="let type of sizeList">
+                  <ion-checkbox labelPlacement="end" color="dark"> </ion-checkbox>
+                 <!-- <ion-text [(ngModel)]="type.value">{{type.label}}</ion-text> -->
+                  <ion-label style="margin-left: 5px;">{{type.label}}</ion-label>
+                </ion-item>
+              </ion-list>
+          </div>
+        </div>
+
+        <div style="margin-left: 20px;margin-top:5px">
+          <ion-text color="dark">
+            <h3>Giới tính</h3>
+          </ion-text>
+          <div style="height: 196px;width: 220px;
+          border: 2px solid #000000;border-radius: 5px;
+          overflow-y: auto;
+          overflow-x: hidden;">
+              <ion-list lines="none" >
+                <ion-item *ngFor="let type of genderList">
+                  <ion-checkbox labelPlacement="end" color="dark"> </ion-checkbox>
+                 <!-- <ion-text [(ngModel)]="type.value">{{type.label}}</ion-text> -->
+                  <ion-label style="margin-left: 5px;">{{type.label}}</ion-label>
+                </ion-item>
+              </ion-list>
+          </div>
+        </div>
+
+        <div style="margin-left: 20px;margin-top:5px">
+          <ion-text color="dark">
+            <h3>Màu sắc</h3>
+          </ion-text>
+          <div style="height: 196px;width: 220px;
+          border: 2px solid #000000;border-radius: 5px;
+          overflow-y: auto;
+          overflow-x: hidden;">
+              <ion-list lines="none" >
+                <ion-item *ngFor="let type of colorList">
+                  <ion-checkbox labelPlacement="end" color="dark"> </ion-checkbox>
+                 <!-- <ion-text [(ngModel)]="type.value">{{type.label}}</ion-text> -->
+                  <ion-label style="margin-left: 5px;">{{type.label}}</ion-label>
+                </ion-item>
+              </ion-list>
+          </div>
+        </div>
+
+        <div style="margin-left: 20px;margin-top:10px">
+          <ion-input style="border: 2px solid #000000;border-radius: 5px;width: 220px;font-weight:500" placeholder="₫ Từ" type="number"
+           [(ngModel)]="fromMoney" (keyup)="keyup()">
+           <ion-label color="dark" style="margin-left: 2px;width:30px;font-weight:500;border-right: 2px solid black;">Từ</ion-label>
+          </ion-input>
+          <ion-input style="border: 2px solid #000000;border-radius: 5px;width: 220px;margin-top:5px" placeholder="₫ Đến" type="number">
+            <ion-text color="dark" style="margin-left: 2px;width:30px;font-weight:500;border-right: 2px solid black;">Đến</ion-text>
+          </ion-input>
+
+        </div>
+
+      </div>
+      <div class="col-xl-10 col-lg-9 col-md-12 col-12 content-collection" style="margin-top: 100px;">
+        <div class="content-product-list product-list filter row">
+          <div class="col-lg-12 col-md-12 col-6" *ngFor="let product of productsPagination"
+            style="margin-bottom: 15px;text-align: center;">
+            <ion-card>
+              <img alt="Silhouette of mountains" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" />
+              <ion-card-header>
+                <ion-card-title>{{ product.name }}</ion-card-title>
+                <ion-card-subtitle color="danger">{{ product.price + ' VND' }}</ion-card-subtitle>
+              </ion-card-header>
+
+              <ion-button (click)="showDetail(product)" fill="clear" style="width: 100%;"><ion-icon name="bag-outline"
+                  color="dark"></ion-icon><ion-text color="dark">{{'Detail'}}</ion-text></ion-button>
+            </ion-card>
+          </div>
+        </div>
+
+        <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)" [length]="products.length"
+          [pageSize]="pageSize" [disabled]="false" [showFirstLastButtons]="true" [hidePageSize]="true"
+          [pageIndex]="pageIndex" aria-label="Select page"
+          style="width: 100%;background: black;margin-top: 24px;">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

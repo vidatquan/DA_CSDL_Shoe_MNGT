@@ -1,8 +1,4 @@
-<!-- <app-navbar *ngIf="currentUser"  [checkMenu]="checkMenu" (changeMenu)="changeMenu($event)"></app-navbar>
+<app-navbar *ngIf="currentUser"  [checkMenu]="checkMenu" (changeMenu)="changeMenu($event)"></app-navbar>
 <div class="container-ui" [ngStyle]="(checkMenu && currentUser)  ? {'margin-left.px': 250} : {'margin-left.px': 60}" [ngStyle]="(checkMenu && currentUser)  ? {'wisth.%': 84} : {'wisth.%': 96}" [ngStyle]="(checkMenu && currentUser) ? {'margin-left.px': 250} : {'margin-left.px': 60}" style="height: 100vh;overflow-y: auto;">
-    <router-outlet #outlet="outlet"></router-outlet>
-</div> -->
-
-<router-outlet #outlet="outlet"></router-outlet>
-
-
+    <router-outlet #outlet="outlet" ></router-outlet>
+</div>

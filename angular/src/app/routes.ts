@@ -16,26 +16,56 @@ import { ShoeReceiveComponent } from './pages/shoe-receive/shoe-receive.componen
 import { HistoryReceiveShoeComponent } from './pages/history-receive-shoe/history-receive-shoe.component';
 import { TopShoeSaleComponent } from './pages/top-shoe-sale/top-shoe-sale.component';
 import { ShoeSupplierComponent } from './pages/shoe-supplier/shoe-supplier.component';
+import { UserIntroComponent } from './pages_user/user-intro/user-intro.component';
+import { UserCollectionComponent } from './pages_user/user-collection/user-collection.component';
+import { UserMainComponent } from './pages_user/user-main/user-main.component';
+import { AdminMainComponent } from './pages/admin-main/admin-main.component';
+import { UserProductComponent } from './pages_user/user-product/user-product.component';
 
 const appRoutes: Routes = [
-  { path: 'log-info', component: LogInfoComponent, canActivate: [AuthGuard] ,data: { state: 'log-info' } },
-  { path: 'employee', component: EmployeeComponent, canActivate: [AuthGuard] ,data: { state: 'employee' } },
-  { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard] ,data: { state: 'customer' } },
-  { path: 'shoe-info', component: ShoeInfoComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-info' } },
-  { path: 'shoe-order', component: ShoeOrderComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-order' } },
-  { path: 'create-shoe-order', component: CreateShoeOrderComponent, canActivate: [AuthGuard] ,data: { state: 'create-shoe-order' } },
-  { path: 'shoe-receive', component: ShoeReceiveComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-receive' } },
-  { path: 'history-receive-shoe', component: HistoryReceiveShoeComponent, canActivate: [AuthGuard] ,data: { state: 'history-receive-shoe' } },
-  { path: 'shoe-sale', component: ShoeSaleComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-sale' } },
-  { path: 'history-shoe-sale', component: HistoryShoeSaleComponent, canActivate: [AuthGuard] ,data: { state: 'history-shoe-sale' } },
-  { path: 'top-shoe-sale', component: TopShoeSaleComponent, canActivate: [AuthGuard] ,data: { state: 'top-shoe-sale' } },
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'shoe-supplier', component: ShoeSupplierComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-supplier' } },
-  { path: 'shoe-shop', component: ShoeShopComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-shop' } },
+
+  { path: 'admin', component: AdminMainComponent, canActivate: [AuthGuard] ,
+    children: [
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '',
+        children: [
+          { path: 'log-info', component: LogInfoComponent, canActivate: [AuthGuard] ,data: { state: 'log-info' } },
+          { path: 'employee', component: EmployeeComponent, canActivate: [AuthGuard] ,data: { state: 'employee' } },
+          { path: 'customer',outlet: 'child1', component: CustomerComponent, canActivate: [AuthGuard] ,data: { state: 'customer' } },
+          { path: 'shoe-info', component: ShoeInfoComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-info' } },
+          { path: 'shoe-order', component: ShoeOrderComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-order' } },
+          { path: 'create-shoe-order', component: CreateShoeOrderComponent, canActivate: [AuthGuard] ,data: { state: 'create-shoe-order' } },
+          { path: 'shoe-receive', component: ShoeReceiveComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-receive' } },
+          { path: 'history-receive-shoe', component: HistoryReceiveShoeComponent, canActivate: [AuthGuard] ,data: { state: 'history-receive-shoe' } },
+          { path: 'shoe-sale', component: ShoeSaleComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-sale' } },
+          { path: 'history-shoe-sale', component: HistoryShoeSaleComponent, canActivate: [AuthGuard] ,data: { state: 'history-shoe-sale' } },
+          { path: 'top-shoe-sale', component: TopShoeSaleComponent, canActivate: [AuthGuard] ,data: { state: 'top-shoe-sale' } },
+          { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard] ,data: { state: 'customer' } },
+          { path: 'login', component: LoginComponent },
+          { path: 'shoe-supplier', component: ShoeSupplierComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-supplier' } },
+          { path: 'shoe-shop', component: ShoeShopComponent, canActivate: [AuthGuard] ,data: { state: 'shoe-shop' } },
+        ]
+      },
+    ]
+  },
+
+  //user-view
+  { path: 'view', component: UserMainComponent,
+    children: [
+      { path: '', component: UserIntroComponent, pathMatch: 'full' },
+      { path: '',
+        //runGuardsAndResolvers: 'always',
+        // canActivate: [AuthGuard],
+        children: [
+          { path: 'collection', component: UserCollectionComponent },
+          { path: 'collection-detail', component: UserProductComponent },
+        ]
+      },
+    ]
+  },
 
   // otherwise redirect to home
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'view' },
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);
