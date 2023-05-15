@@ -4,8 +4,24 @@
       <div class="d-none d-lg-block d-xl-block col-xl-2 col-lg-3 sidebar-collection" style="margin-top: 100px;">
         <div style="margin-left: 20px;">
           <!-- <ion-button color="dark"><ion-icon name="funnel-outline"></ion-icon>Khôi phục</ion-button> -->
-          <ion-button fill="outline" color="dark" style="margin-right:5px;">Tìm kiếm</ion-button>
-          <ion-button fill="outline" color="dark">Khôi phục</ion-button>
+          <ion-button fill="outline" color="dark" style="margin-right:5px;" (click)="search()">Tìm kiếm</ion-button>
+          <ion-button fill="outline" color="dark" (click)="reset()">Khôi phục</ion-button>
+        </div>
+        <div style="margin-left: 20px;margin-top:5px">
+          <ion-text color="dark">
+            <h5>Đại lý</h5>
+          </ion-text>
+          <select id="inputGroupSelect01" style="
+          border: 2px solid #000000;border-radius: 5px;width: 220px;height:50px;
+          color:black;padding-left: 5px;font-size: initial;font-weight: 400;"
+           [ngModel]="selectedShopId" (ngModelChange)="selectedShopId=($event)">
+            <option selected value="0">Choose...</option>
+            <option value=1>
+              <ion-label >{{'Thanh xuân Nam'}}</ion-label>
+            </option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
         </div>
         <div style="margin-left: 20px;margin-top:5px">
           <ion-text color="dark">
@@ -17,7 +33,8 @@
           overflow-x: hidden;">
               <ion-list lines="none" >
                 <ion-item *ngFor="let type of typeList">
-                  <ion-checkbox labelPlacement="end" color="dark"> </ion-checkbox>
+                  <ion-checkbox labelPlacement="end" color="dark"
+                  [ngModel]="type.checked" (ngModelChange)="type.checked = ($event)"> </ion-checkbox>
                  <!-- <ion-text [(ngModel)]="type.value">{{type.label}}</ion-text> -->
                   <ion-label style="margin-left: 5px;">{{type.label}}</ion-label>
                 </ion-item>
@@ -35,7 +52,8 @@
           overflow-x: hidden;">
               <ion-list lines="none" >
                 <ion-item *ngFor="let type of sizeList">
-                  <ion-checkbox labelPlacement="end" color="dark"> </ion-checkbox>
+                  <ion-checkbox labelPlacement="end" color="dark"
+                  [ngModel]="type.checked" (ngModelChange)="type.checked = ($event)"> </ion-checkbox>
                  <!-- <ion-text [(ngModel)]="type.value">{{type.label}}</ion-text> -->
                   <ion-label style="margin-left: 5px;">{{type.label}}</ion-label>
                 </ion-item>
@@ -53,7 +71,8 @@
           overflow-x: hidden;">
               <ion-list lines="none" >
                 <ion-item *ngFor="let type of genderList">
-                  <ion-checkbox labelPlacement="end" color="dark"> </ion-checkbox>
+                  <ion-checkbox labelPlacement="end" color="dark"
+                  [ngModel]="type.checked" (ngModelChange)="type.checked = ($event)"> </ion-checkbox>
                  <!-- <ion-text [(ngModel)]="type.value">{{type.label}}</ion-text> -->
                   <ion-label style="margin-left: 5px;">{{type.label}}</ion-label>
                 </ion-item>
@@ -71,7 +90,8 @@
           overflow-x: hidden;">
               <ion-list lines="none" >
                 <ion-item *ngFor="let type of colorList">
-                  <ion-checkbox labelPlacement="end" color="dark"> </ion-checkbox>
+                  <ion-checkbox labelPlacement="end" color="dark"
+                  [ngModel]="type.checked" (ngModelChange)="type.checked = ($event)"> </ion-checkbox>
                  <!-- <ion-text [(ngModel)]="type.value">{{type.label}}</ion-text> -->
                   <ion-label style="margin-left: 5px;">{{type.label}}</ion-label>
                 </ion-item>
@@ -84,7 +104,8 @@
            [(ngModel)]="fromMoney" (keyup)="keyup()">
            <ion-label color="dark" style="margin-left: 2px;width:30px;font-weight:500;border-right: 2px solid black;">Từ</ion-label>
           </ion-input>
-          <ion-input style="border: 2px solid #000000;border-radius: 5px;width: 220px;margin-top:5px" placeholder="₫ Đến" type="number">
+          <ion-input style="border: 2px solid #000000;border-radius: 5px;width: 220px;margin-top:5px" placeholder="₫ Đến" type="number"
+          [(ngModel)]="toMoney" (keyup)="keyup()">
             <ion-text color="dark" style="margin-left: 2px;width:30px;font-weight:500;border-right: 2px solid black;">Đến</ion-text>
           </ion-input>
 

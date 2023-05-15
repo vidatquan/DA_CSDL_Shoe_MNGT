@@ -1,19 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-user-cart',
-  templateUrl: './user-cart.component.html',
-  styleUrls: ['./user-cart.component.scss']
+  selector: 'app-order-detail',
+  templateUrl: './order-detail.component.html',
+  styleUrls: ['./order-detail.component.scss']
 })
-export class UserCartComponent implements OnInit {
+export class OrderDetailComponent implements OnInit {
   product;
 
   paymentMethods = "cod";
   products;
   deliveryTime = "in";
-  constructor() { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+
+  ) {
+   }
 
   ngOnInit() {
+    const id = this.route.snapshot.queryParamMap.get('id');
+    console.log('hello'+id);
 
     this.products = [
       {
@@ -391,5 +399,9 @@ export class UserCartComponent implements OnInit {
   changeQuantity(param){
     if(param.quantity < 1) param.quantity = 1;
     console.log(param);
+  }
+
+  shopping(){
+    this.router.navigateByUrl('view/collection');
   }
 }

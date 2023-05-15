@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-product',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-product.component.scss']
 })
 export class UserProductComponent implements OnInit {
-
-  constructor() { }
+  product;
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  addToCart(param){
+
+  }
+
+  shopNow(){
+    this.router.navigateByUrl('/view/collection-detail');
   }
 
 }

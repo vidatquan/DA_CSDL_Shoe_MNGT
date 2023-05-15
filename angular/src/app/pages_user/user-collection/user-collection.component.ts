@@ -13,18 +13,17 @@ export class UserCollectionComponent implements OnInit {
   products: any[];
   productsPagination: any[];
 
-  fromMoney:any;
 
   colorList: any[] = [
     // { label: "Tất cả", value: "Tất cả" },
-    { label: "Đen", value: "Đen" },
-    { label: "Đỏ", value: "Đỏ" },
-    { label: "Xám", value: "Xám" },
-    { label: "Hồng", value: "Hồng" },
-    { label: "Trắng", value: "Trắng" },
-    { label: "Xanh da trời", value: "Xanh da trời" },
-    { label: "Xanh rêu", value: "Xanh rêu" },
-    { label: "Phối màu", value: "Phối màu" },
+    { label: "Đen", value: "Đen", checked: false },
+    { label: "Đỏ", value: "Đỏ", checked: false },
+    { label: "Xám", value: "Xám", checked: false },
+    { label: "Hồng", value: "Hồng", checked: false },
+    { label: "Trắng", value: "Trắng", checked: false },
+    { label: "Xanh da trời", value: "Xanh da trời", checked: false },
+    { label: "Xanh rêu", value: "Xanh rêu", checked: false },
+    { label: "Phối màu", value: "Phối màu", checked: false },
   ];
 
   statusList: any[] = [
@@ -35,53 +34,53 @@ export class UserCollectionComponent implements OnInit {
 
   genderList: any[] = [
     // { label: "Tất cả", value: -1 },
-    { label: "Nam", value: 0 },
-    { label: "Nữ", value: 1 },
-    { label: "Unisex", value: 2 },
-    { label: "Trẻ em", value: 3 },
+    { label: "Nam", value: 0, checked: false },
+    { label: "Nữ", value: 1, checked: false },
+    { label: "Unisex", value: 2, checked: false },
+    { label: "Trẻ em", value: 3, checked: false },
   ];
 
   typeList: any[] = [
     // { label: "Tất cả", value: -1 },
-    { label: "UltraBoost", value: 0 },
-    { label: "Yeezy", value: 1 },
-    { label: "StanSmith", value: 2 },
-    { label: "NMD", value: 3 },
-    { label: "Alphabounce", value: 4 },
-    { label: "EQT", value: 5 },
-    { label: "PulseBoost", value: 6 },
-    { label: "SuperStar", value: 7 }
+    { label: "UltraBoost", value: 0, checked: false },
+    { label: "Yeezy", value: 1, checked: false },
+    { label: "StanSmith", value: 2, checked: false },
+    { label: "NMD", value: 3, checked: false },
+    { label: "Alphabounce", value: 4, checked: false },
+    { label: "EQT", value: 5, checked: false },
+    { label: "PulseBoost", value: 6, checked: false },
+    { label: "SuperStar", value: 7, checked: false }
   ];
   sizeList: any[] = [
     // { label: "Tất cả", value: -1 },
-    { label: "3", value: 3 },
-    { label: "4", value: 4 },
-    { label: "5", value: 5 },
-    { label: "6", value: 6 },
-    { label: "7", value: 7 },
-    { label: "8", value: 8 },
-    { label: "9", value: 9 },
-    { label: "10", value: 10 },
-    { label: "11", value: 11 },
-    { label: "24", value: 24 },
-    { label: "28", value: 28 },
-    { label: "30", value: 30 },
-    { label: "36", value: 36 },
-    { label: "36 1/2", value: 3612 },
-    { label: "37", value: 37 },
-    { label: "37 1/2", value: 3712 },
-    { label: "38", value: 38 },
-    { label: "38 1/2", value: 3812 },
-    { label: "39", value: 39 },
-    { label: "39 1/2", value: 3912 },
-    { label: "40", value: 40 },
-    { label: "40 1/2", value: 4012 },
-    { label: "41", value: 41 },
-    { label: "41 1/2", value: 4112 },
-    { label: "42", value: 41 },
-    { label: "42 1/2", value: 4212 },
-    { label: "43", value: 41 },
-    { label: "43 1/2", value: 4312 },
+    { label: "3", value: 3, checked: false },
+    { label: "4", value: 4, checked: false },
+    { label: "5", value: 5, checked: false },
+    { label: "6", value: 6, checked: false },
+    { label: "7", value: 7, checked: false },
+    { label: "8", value: 8, checked: false },
+    { label: "9", value: 9, checked: false },
+    { label: "10", value: 10, checked: false },
+    { label: "11", value: 11, checked: false },
+    { label: "24", value: 24, checked: false },
+    { label: "28", value: 28, checked: false },
+    { label: "30", value: 30, checked: false },
+    { label: "36", value: 36, checked: false },
+    { label: "36 1/2", value: 3612, checked: false },
+    { label: "37", value: 37, checked: false },
+    { label: "37 1/2", value: 3712, checked: false },
+    { label: "38", value: 38, checked: false },
+    { label: "38 1/2", value: 3812, checked: false },
+    { label: "39", value: 39, checked: false },
+    { label: "39 1/2", value: 3912, checked: false },
+    { label: "40", value: 40, checked: false },
+    { label: "40 1/2", value: 4012, checked: false },
+    { label: "41", value: 41, checked: false },
+    { label: "41 1/2", value: 4112, checked: false },
+    { label: "42", value: 41, checked: false },
+    { label: "42 1/2", value: 4212, checked: false },
+    { label: "43", value: 41, checked: false },
+    { label: "43 1/2", value: 4312, checked: false },
   ];
 
 
@@ -89,6 +88,16 @@ export class UserCollectionComponent implements OnInit {
   pageIndex = 0;
 
   test={} ;
+
+  selectedShopId;
+  selectedTypeList = [];
+  selectedSizeList = [];
+  selectedGenderList = [];
+  selectedColorList = [];
+  fromMoney:any;
+  toMoney:any;
+
+
 
   constructor(private router: Router) { }
 
@@ -105,7 +114,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Accessories',
         quantity: 24,
         inventoryStatus: 'INSTOCK',
-        rating: 5
+        rating: 5,
+        checked: false
       },
       {
         id: '1001',
@@ -117,7 +127,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Accessories',
         quantity: 61,
         inventoryStatus: 'OUTOFSTOCK',
-        rating: 4
+        rating: 4,
+        checked: false
       },
       {
         id: '1002',
@@ -129,7 +140,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Fitness',
         quantity: 2,
         inventoryStatus: 'LOWSTOCK',
-        rating: 3
+        rating: 3,
+        checked: false
       },
       {
         id: '1003',
@@ -141,7 +153,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Clothing',
         quantity: 25,
         inventoryStatus: 'INSTOCK',
-        rating: 5
+        rating: 5,
+        checked: false
       },
       {
         id: '1004',
@@ -153,7 +166,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Accessories',
         quantity: 73,
         inventoryStatus: 'INSTOCK',
-        rating: 4
+        rating: 4,
+        checked: false
       },
       {
         id: '1005',
@@ -165,7 +179,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Accessories',
         quantity: 0,
         inventoryStatus: 'OUTOFSTOCK',
-        rating: 4
+        rating: 4,
+        checked: false
       },
       {
         id: '1006',
@@ -177,7 +192,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Accessories',
         quantity: 5,
         inventoryStatus: 'LOWSTOCK',
-        rating: 3
+        rating: 3,
+        checked: false
       },
       {
         id: '1007',
@@ -189,7 +205,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Accessories',
         quantity: 23,
         inventoryStatus: 'INSTOCK',
-        rating: 5
+        rating: 5,
+        checked: false
       },
       {
         id: '1008',
@@ -201,7 +218,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Electronics',
         quantity: 2,
         inventoryStatus: 'LOWSTOCK',
-        rating: 4
+        rating: 4,
+        checked: false
       },
       {
         id: '1009',
@@ -213,7 +231,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Electronics',
         quantity: 63,
         inventoryStatus: 'INSTOCK',
-        rating: 3
+        rating: 3,
+        checked: false
       },
       {
         id: '1010',
@@ -225,7 +244,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Accessories',
         quantity: 0,
         inventoryStatus: 'OUTOFSTOCK',
-        rating: 4
+        rating: 4,
+        checked: false
       },
       {
         id: '1011',
@@ -237,7 +257,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Electronics',
         quantity: 23,
         inventoryStatus: 'INSTOCK',
-        rating: 4
+        rating: 4,
+        checked: false
       },
       {
         id: '1012',
@@ -249,7 +270,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Clothing',
         quantity: 74,
         inventoryStatus: 'INSTOCK',
-        rating: 5
+        rating: 5,
+        checked: false
       },
       {
         id: '1013',
@@ -261,7 +283,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Clothing',
         quantity: 0,
         inventoryStatus: 'OUTOFSTOCK',
-        rating: 3
+        rating: 3,
+        checked: false
       },
       {
         id: '1014',
@@ -273,7 +296,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Electronics',
         quantity: 8,
         inventoryStatus: 'LOWSTOCK',
-        rating: 5
+        rating: 5,
+        checked: false
       },
       {
         id: '1015',
@@ -285,7 +309,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Clothing',
         quantity: 34,
         inventoryStatus: 'INSTOCK',
-        rating: 4
+        rating: 4,
+        checked: false
       },
       {
         id: '1016',
@@ -297,7 +322,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Fitness',
         quantity: 12,
         inventoryStatus: 'INSTOCK',
-        rating: 3
+        rating: 3,
+        checked: false
       },
       {
         id: '1017',
@@ -309,7 +335,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Clothing',
         quantity: 42,
         inventoryStatus: 'INSTOCK',
-        rating: 4
+        rating: 4,
+        checked: false
       },
       {
         id: '1018',
@@ -321,7 +348,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Accessories',
         quantity: 41,
         inventoryStatus: 'INSTOCK',
-        rating: 5
+        rating: 5,
+        checked: false
       },
       {
         id: '1019',
@@ -333,7 +361,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Fitness',
         quantity: 63,
         inventoryStatus: 'INSTOCK',
-        rating: 4
+        rating: 4,
+        checked: false
       },
       {
         id: '1020',
@@ -345,7 +374,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Accessories',
         quantity: 0,
         inventoryStatus: 'OUTOFSTOCK',
-        rating: 4
+        rating: 4,
+        checked: false
       },
       {
         id: '1021',
@@ -357,7 +387,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Fitness',
         quantity: 6,
         inventoryStatus: 'LOWSTOCK',
-        rating: 3
+        rating: 3,
+        checked: false
       },
       {
         id: '1022',
@@ -369,7 +400,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Accessories',
         quantity: 62,
         inventoryStatus: 'INSTOCK',
-        rating: 4
+        rating: 4,
+        checked: false
       },
       {
         id: '1023',
@@ -381,7 +413,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Clothing',
         quantity: 2,
         inventoryStatus: 'LOWSTOCK',
-        rating: 5
+        rating: 5,
+        checked: false
       },
       {
         id: '1024',
@@ -393,7 +426,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Clothing',
         quantity: 0,
         inventoryStatus: 'INSTOCK',
-        rating: 4
+        rating: 4,
+        checked: false
       },
       {
         id: '1025',
@@ -405,7 +439,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Clothing',
         quantity: 52,
         inventoryStatus: 'INSTOCK',
-        rating: 4
+        rating: 4,
+        checked: false
       },
       {
         id: '1026',
@@ -417,7 +452,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Clothing',
         quantity: 3,
         inventoryStatus: 'LOWSTOCK',
-        rating: 3
+        rating: 3,
+        checked: false
       },
       {
         id: '1027',
@@ -429,7 +465,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Electronics',
         quantity: 35,
         inventoryStatus: 'INSTOCK',
-        rating: 3
+        rating: 3,
+        checked: false
       },
       {
         id: '1028',
@@ -441,7 +478,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Fitness',
         quantity: 15,
         inventoryStatus: 'INSTOCK',
-        rating: 5
+        rating: 5,
+        checked: false
       },
       {
         id: '1029',
@@ -453,7 +491,8 @@ export class UserCollectionComponent implements OnInit {
         category: 'Fitness',
         quantity: 25,
         inventoryStatus: 'INSTOCK',
-        rating: 8
+        rating: 8,
+        checked: false
       }
     ];
 
@@ -486,6 +525,30 @@ export class UserCollectionComponent implements OnInit {
   keyup(){
     console.log(this.fromMoney);
     this.fromMoney = this.fromMoney.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  onChangeType(param,type){
+    console.log(param);
+   // this.selectedShop = param;
+    console.log(type);
+  }
+
+  reset(){
+    this.selectedShopId = 0;
+    this.typeList.map(e => e.checked = false);
+    this.genderList.map(e => e.checked = false);
+    this.sizeList.map(e => e.checked = false);
+    this.colorList.map(e => e.checked = false);
+    this.fromMoney = undefined;
+    this.toMoney = undefined;
+    // this.
+  }
+
+  search(){
+    console.log(this.typeList);
+    console.log(this.sizeList);
+    console.log(this.genderList);
+    console.log(this.colorList);
   }
 
 

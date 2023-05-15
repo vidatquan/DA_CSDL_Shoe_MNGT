@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     private alertService: AlertService
   ) {
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/admin']);
     }
   }
 
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (data) => {
           if (data === null) return alertify.error('Tài khoản hoặc mật khẩu không chính xác');
-          
+
           this.router.navigate([this.returnUrl]);
           window.location.reload();
           this.alertService.success('Success');

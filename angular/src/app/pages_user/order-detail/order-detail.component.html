@@ -6,7 +6,7 @@
       <ion-text style="font-size: 32px" color="dark">
         <ion-icon name="bag-handle-outline" class=" mr-2"></ion-icon>
         <span>
-          Giỏ hàng của bạn
+          {{'Đơn hàng của bạn : ' + 'ÁKDAODASOKDAK | Đang vận chuyển'}}
         </span>
       </ion-text>
       <div class="info-prodcut">
@@ -44,12 +44,11 @@
             {{product.price + ' VND'}}
           </div>
           <div class="col-1" style="margin:auto">
-            <input (keyup)="changeQuantity(product)" min="1" class="input-info text-center" style="width: 100%;" type="number" placeholder="SL" [(ngModel)]="product.quantity">
+            <input disabled (keyup)="changeQuantity(product)" min="1" class="input-info text-center" style="width: 100%;" type="number" placeholder="SL" [(ngModel)]="product.quantity">
           </div>
           <div class="col-2 text-right" style="margin:auto">
             {{product.price + ' VND'}}
-            <ion-icon name="trash-outline" class=" ml-1" style="font-size: 16px;"></ion-icon>
-            <!-- <button type="button" (click)="delete(product)"><i class="pi pi-trash" style="font-size: 1.2rem" ></i></button> -->
+            <!-- <ion-icon name="trash-outline" class=" ml-1" style="font-size: 16px;"></ion-icon> -->
           </div>
         </div>
       </div>
@@ -67,19 +66,19 @@
 
             <div class="row mb-3">
               <div class="col-12 d-flex justify-content-between mb-3">
-                <input class="input-info" style="width: 100%;" type="text" placeholder="Họ và tên">
+                <input disabled class="input-info" style="width: 100%;" type="text" placeholder="Họ và tên">
               </div>
               <div class="col-12 d-flex justify-content-between mb-3">
-                <input class="input-info" style="width: 48%;margin-right:10px" type="text" placeholder="Email">
-                <input class="input-info" style="width: 48%;" type="text" placeholder="Số điện thoại">
+                <input disabled class="input-info" style="width: 48%;margin-right:10px" type="text" placeholder="Email">
+                <input disabled class="input-info" style="width: 48%;" type="text" placeholder="Số điện thoại">
               </div>
               <div class="col-12 d-flex d-flex justify-content-between mb-3">
-                <input style="width:30%" type="text" placeholder="Tỉnh/Thành phố" class=" input-info">
-                <input style="width:30%" type="text" placeholder="Quận/Huyện" class=" input-info">
-                <input style="width:30%" type="text" placeholder="Phường/Xã" class=" input-info">
+                <input disabled style="width:30%" type="text" placeholder="Tỉnh/Thành phố" class=" input-info">
+                <input disabled style="width:30%" type="text" placeholder="Quận/Huyện" class=" input-info">
+                <input disabled style="width:30%" type="text" placeholder="Phường/Xã" class=" input-info">
               </div>
               <div class="col-12 mb-3">
-                <input class=" input-info" style="width: 100%;" type="text" placeholder="Địa chỉ">
+                <input disabled class=" input-info" style="width: 100%;" type="text" placeholder="Địa chỉ">
               </div>
 
             </div>
@@ -93,13 +92,13 @@
               <br>
 
               <div class="form-check ml-2">
-                <input [(ngModel)]="deliveryTime" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="in">
+                <input disabled [(ngModel)]="deliveryTime" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="in">
                 <label class="form-check-label" for="exampleRadios1" style="font-size:16px;margin-bottom: 2px;margin-left: 5px;color: black;">
                   Giao trong giờ hành chính
                 </label>
               </div>
               <div class="form-check mt-2 ml-2">
-                <input [(ngModel)]="deliveryTime" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="out">
+                <input disabled [(ngModel)]="deliveryTime" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="out">
                 <label class="form-check-label" for="exampleRadios2" style="font-size:16px;margin-bottom: 2px;margin-left: 5px;color: black;">
                   Giao ngoài giờ hành chính
                 </label>
@@ -117,7 +116,7 @@
             <br>
             <br>
             <div class="form-check mt-2 ml-2">
-              <input class="form-check-input" type="radio" name="method" id="method"  value="method" checked>
+              <input disabled class="form-check-input" type="radio" name="method" id="method"  value="method" checked>
               <label class="form-check-label" for="method" style="font-size:16px;margin-bottom: 2px;margin-left: 5px; position: absolute;top:-2px;color: black;">
                 <span class="delivery-title"><b>Giao hàng tiêu chuẩn</b></span>
                   <div class="delivery-desc">Miễn phí vận chuyển đối với đơn hàng từ 500.000<sup>đ</sup> giao tại nội
@@ -138,34 +137,17 @@
             </ion-text>
             <br>
             <div class="form-check ml-2">
-              <input [(ngModel)]="paymentMethods" class="form-check-input" type="radio" name="cod" id="cod" value="cod" >
+              <input disabled [(ngModel)]="paymentMethods" class="form-check-input" type="radio" name="cod" id="cod" value="cod" >
               <label class="form-check-label" for="cod" style="font-size:16px;margin-bottom: 2px;margin-left: 5px;color: black;">
                 Thanh toán khi nhận hàng
               </label>
             </div>
             <div class="form-check mt-2 ml-2">
-              <input [(ngModel)]="paymentMethods" class="form-check-input" type="radio" name="bank" id="bank" value="bank">
+              <input disabled [(ngModel)]="paymentMethods" class="form-check-input" type="radio" name="bank" id="bank" value="bank">
               <label class="form-check-label" for="bank" style="font-size:16px;margin-bottom: 2px;margin-left: 5px;color: black;">
                 Thanh toán bằng chuyển khoản
               </label>
             </div>
-          </div>
-          <div class="payment-method">
-            <ion-text style="font-size: 32px" color="dark">
-              <ion-icon name="cash-outline" class=" mr-2"></ion-icon>
-              <span>
-                Mã giảm giá
-              </span>
-            </ion-text>
-            <br>
-            <div style="display: flex;">
-              <ion-input style="width:70%" style="border: 2px solid #000000;border-radius: 5px;font-weight:500"
-                placeholder="Mã giảm giá">
-              </ion-input>
-              <ion-button style="width:30%;height: 54px;" color="dark">Áp dụng</ion-button>
-            </div>
-
-
           </div>
 
           <div class="v-infomation-content">
@@ -194,9 +176,9 @@
 
           <div style="display: flex;margin-left:15px">
             <!-- <ion-button color="dark"><ion-icon name="funnel-outline"></ion-icon>Khôi phục</ion-button> -->
-            <ion-button style="width:50%" fill="outline" color="dark" style="margin-right:5px;">Tiếp tục mua
+            <ion-button style="width:100%" fill="outline" color="dark" style="margin-right:5px;" (click)="shopping()">Tiếp tục mua
               sắm</ion-button>
-            <ion-button style="width:50%" color="dark">Đặt hàng</ion-button>
+            <!-- <ion-button style="width:50%" color="dark">Đặt hàng</ion-button> -->
           </div>
         </div>
       </div>
@@ -205,34 +187,3 @@
   </div>
 </div>
 
-<div style="margin-top:200px;width: 1530px;margin-bottom:200px;">
-  <div style="margin: auto;width:80%;padding: 10px;">
-
-    <div class="d-flex  row">
-      <div class="col-md-6 text-right">
-        <img src="https://asset.vuahanghieu.com/assets/images/empty.png" alt="shoes" class="img-shoe">
-      </div>
-      <div class="col-md-4">
-        <div style="margin: 0;
-          position: absolute;
-          top: 50%;
-          -ms-transform: translateY(-50%);
-          transform: translateY(-50%);">
-          <ion-text>
-            <h1>
-              Giỏ hàng của bạn đang rỗng!
-            </h1>
-          </ion-text>
-          <ion-text style="font-size:16px;">
-            <span>
-              Thật tiếc! Chúng tôi biết bạn đang muốn mua món đồ gì đó.
-              Nhưng trước tiên bạn cần thêm món đồ đó vào giỏ hàng của mình.</span>
-            <br>
-            <span>Nhấn <a href="/view/collection">vào đây</a> để tiếp tục mua sắm.
-            </span>
-          </ion-text>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

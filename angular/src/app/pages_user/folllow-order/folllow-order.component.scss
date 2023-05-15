@@ -1,0 +1,35 @@
+.table {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+   border-radius: 5px;
+   //border-collapse: collapse;
+  //  box-sizing: border-box;width: 100%;
+  // table-layout: auto;width: 100%;
+
+}
+
+.table thead:nth-child(1) {
+  //-moz-border-radius: 5px;
+   -webkit-border-radius: 5px 0px 0px 5px;
+   border-radius: 5px 0px 0px 5px;
+}
+
+tbody tr:hover{
+  background-color: #f4f4f4;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+tbody {
+  display: block;
+  height: 400px;
+  overflow: auto;
+}
+thead, tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;/* even columns width , fix width of table too*/
+}
+thead {
+//  width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
+}
+

@@ -40,12 +40,12 @@
             </li>
 
             <li class="navbar-item">
-              <a href="#" class="navbar-link">Shop</a>
+              <a href="/admin/login" class="navbar-link">Admin</a>
             </li>
 
-            <li class="navbar-item">
+            <!-- <li class="navbar-item">
               <a href="#" class="navbar-link">Blog</a>
-            </li>
+            </li> -->
 
             <li class="navbar-item">
               <a href="#" class="navbar-link">Contact</a>
@@ -55,23 +55,17 @@
 
           <ul class="nav-action-list">
 
-            <li>
+            <!-- <li>
               <button class="nav-action-btn">
                 <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
 
                 <span class="nav-action-text">Search</span>
               </button>
-            </li>
+            </li> -->
 
-            <li>
-              <a href="#" class="nav-action-btn">
-                <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
 
-                <span class="nav-action-text">Login / Register</span>
-              </a>
-            </li>
 
-            <li>
+            <!-- <li>
               <button class="nav-action-btn">
                 <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
 
@@ -79,18 +73,40 @@
 
                 <data class="nav-action-badge" value="5" aria-hidden="true">5</data>
               </button>
-            </li>
+            </li> -->
 
             <li>
-              <button class="nav-action-btn">
+              <!-- <button class="nav-action-btn">
                 <ion-icon name="bag-outline" aria-hidden="true"></ion-icon>
 
                 <data class="nav-action-text" value="318.00">Basket: <strong>$318.00</strong></data>
 
                 <data class="nav-action-badge" value="4" aria-hidden="true">4</data>
-              </button>
-            </li>
+              </button> -->
 
+              <a href="view/cart" class="nav-action-btn">
+                <ion-icon name="bag-outline" aria-hidden="true"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <div class="dropdown show">
+
+                <a href="#" class="nav-action-btn dropdown-toggle" data-toggle="dropdown">
+                  <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+
+                  <span class="nav-action-text">Login / Register</span>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item " href="view/log-in">Đăng nhập</a>
+                  <a class="dropdown-item" href="view/register">Đăng ký</a>
+                  <a class="dropdown-item" href="#">Đăng xuất</a>
+                  <a class="dropdown-item" href="view/follow-order">Theo dõi đơn hàng</a>
+                </div>
+              </div>
+
+
+            </li>
           </ul>
 
         </nav>

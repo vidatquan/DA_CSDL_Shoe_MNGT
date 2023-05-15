@@ -21,6 +21,11 @@ import { UserCollectionComponent } from './pages_user/user-collection/user-colle
 import { UserMainComponent } from './pages_user/user-main/user-main.component';
 import { AdminMainComponent } from './pages/admin-main/admin-main.component';
 import { UserProductComponent } from './pages_user/user-product/user-product.component';
+import { UserCartComponent } from './pages_user/user-cart/user-cart.component';
+import { UserLogInComponent } from './pages_user/user-log-in/user-log-in.component';
+import { UserRegisterComponent } from './pages_user/user-register/user-register.component';
+import { FolllowOrderComponent } from './pages_user/folllow-order/folllow-order.component';
+import { OrderDetailComponent } from './pages_user/order-detail/order-detail.component';
 
 const appRoutes: Routes = [
 
@@ -59,6 +64,11 @@ const appRoutes: Routes = [
         children: [
           { path: 'collection', component: UserCollectionComponent },
           { path: 'collection-detail', component: UserProductComponent },
+          { path: 'cart', component: UserCartComponent },
+          { path: 'log-in', component: UserLogInComponent },
+          { path: 'register', component: UserRegisterComponent },
+          { path: 'follow-order', component: FolllowOrderComponent },
+          { path: 'order-detail', component: OrderDetailComponent },
         ]
       },
     ]

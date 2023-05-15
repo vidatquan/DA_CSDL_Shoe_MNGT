@@ -65,6 +65,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 import { AdminMainComponent } from './pages/admin-main/admin-main.component';
+import { UserLogInComponent } from './pages_user/user-log-in/user-log-in.component';
+import { FolllowOrderComponent } from './pages_user/folllow-order/folllow-order.component';
+import { UserRegisterComponent } from './pages_user/user-register/user-register.component';
+import { OrderDetailComponent } from './pages_user/order-detail/order-detail.component';
 // import { CurrencyPipe } from '@angular/common';
 
 
@@ -109,7 +113,11 @@ import { AdminMainComponent } from './pages/admin-main/admin-main.component';
     UserCollectionComponent,
     UserProductComponent,
     UserMainComponent,
-    AdminMainComponent
+    AdminMainComponent,
+    UserLogInComponent,
+    FolllowOrderComponent,
+    UserRegisterComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,

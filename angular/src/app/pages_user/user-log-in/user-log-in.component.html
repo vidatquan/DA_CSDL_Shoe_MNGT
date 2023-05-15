@@ -1,0 +1,31 @@
+<div style="margin-top:200px;width: 1530px;margin-bottom:200px;margin-right: auto;margin-left: auto">
+  <div style="margin: auto;
+  width:40%;
+  padding: 10px;">
+        <ion-text style="font-size: 32px" color="dark">
+          <ion-icon name="alert-circle-outline" class=" mr-2"></ion-icon>
+          <span>
+            Đăng nhập
+          </span>
+        </ion-text>
+        <div class="row mb-3">
+          <div class="col-12 d-flex justify-content-between mb-3">
+            <input class="input-info" style="width: 100%;" type="text" placeholder="Tài khoản" [(ngModel)]="resgisterUser.CusName">
+          </div>
+          <div class="col-12 d-flex justify-content-between mb-3">
+            <input class="input-info" style="width: 100%;" type="password" placeholder="Mật khẩu" [(ngModel)]="resgisterUser.CusName">
+          </div>
+          <div class="col-12 mb-3 text-right ">
+            <button style="width: 50%;margin-right:10px;border:1px solid black" type="button" class="btn btn-light" (click)="login()">Đăng nhập</button>
+            <button style="width:48%" type="button" class="btn btn-dark" (click)="register()">Đăng ký</button>
+          </div>
+          <div class="col-12 d-flex justify-content-between mb-3">
+            <ion-label (click)="loginAdmin()" color="dark"
+            style="margin-left: 2px;font-weight:500;border-bottom: 2px solid black;cursor: pointer;">Đăng nhập với tư cách nhân viên</ion-label>
+          </div>
+        </div>
+
+
+
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div style="margin-top:170px;width: 1530px;margin-bottom:200px;margin-right: auto;margin-left: auto">
+  <div style="margin: auto;
+  width:80%;
+  padding: 10px;">
+        <ion-text style="font-size: 32px;" color="dark">
+          <ion-icon name="chatbox-ellipses-outline" class=" mr-2"></ion-icon>
+          <span>
+            Theo dõi đơn hàng
+          </span>
+        </ion-text>
+        <!-- <div class="row mb-3">
+          <div class="col-12 d-flex justify-content-between mb-3">
+            <input class="input-info" style="width: 100%;" type="text" placeholder="Tài khoản" [(ngModel)]="resgisterUser.CusName">
+          </div>
+          <div class="col-12 d-flex justify-content-between mb-3">
+            <input class="input-info" style="width: 100%;" type="password" placeholder="Mật khẩu" [(ngModel)]="resgisterUser.CusName">
+          </div>
+          <div class="col-12 mb-3 text-right ">
+            <button style="width: 50%;margin-right:10px;border:1px solid black" type="button" class="btn btn-light" (click)="login()">Đăng nhập</button>
+            <button style="width:48%" type="button" class="btn btn-dark" (click)="register()">Đăng ký</button>
+          </div>
+        </div> -->
+        <table class="table">
+          <thead class="thead-dark">
+            <!-- <tr class="thead-dark"> -->
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Mã đơn hàng</th>
+                <th scope="col">Ngày tạo</th>
+                <th scope="col">Tổng tiền</th>
+                <th scope="col">Trạng thái</th>
+              </tr>
+            <!-- </tr> -->
+          </thead>
+          <!-- <div style="height:400px; overflow-y: auto;
+          overflow-x: hidden;"> -->
+            <tbody>
+              <tr (click)="alo(order)" *ngFor="let order of products;index as i;">
+                <th scope="row">{{i+1}}</th>
+                <td>{{order.code}}</td>
+                <td>{{order.name}}</td>
+                <td>{{order.category}}</td>
+                <td [ngStyle]="{'color': order.rating == 3 ? 'red' : (order.rating == 4 ? 'blue' : (order.rating == 5 ? '#1e8e14' : null))}">
+                  {{order.inventoryStatus}}
+                </td>
+              </tr>
+              <!-- <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@mdo</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@mdo</td>
+                <td>@twitter</td>
+              </tr> -->
+            </tbody>
+          <!-- </div> -->
+        </table>
+  </div>
+</div>
