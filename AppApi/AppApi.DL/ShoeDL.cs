@@ -208,6 +208,218 @@ namespace AppApi.DL
             return false;
         }
         #endregion
+
+        #region Lấy thông tin cho khách hàng
+        public List<Shoes> GetShoesInfoByCustomer(GetShoeInfoByCusInput input)
+        {
+            _conn.Open();
+
+            string spName = @"dbo.[GetShoeInfoByCustomer]";
+            SqlCommand cmd = new SqlCommand(spName, _conn);
+
+            cmd.Parameters.AddWithValue("@ShopId", input.ShopId ?? -1);
+            cmd.Parameters.AddWithValue("@ShoeType", input.ShoeType);
+            cmd.Parameters.AddWithValue("@Size", input.Size);
+            cmd.Parameters.AddWithValue("@Gender", input.Gender);
+            cmd.Parameters.AddWithValue("@Color", input.Color);
+            cmd.Parameters.AddWithValue("@FromPrice", input.FromPrice ?? -1);
+            cmd.Parameters.AddWithValue("@ToPrice", input.ToPrice ?? -1);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataReader sqlDataReader = cmd.ExecuteReader();
+
+            var shoes = new List<Shoes>();
+            if (sqlDataReader.HasRows)
+            {
+                while (sqlDataReader.Read())
+                {
+                    var shoe = new Shoes();
+                    shoe.Id = (int)sqlDataReader["id"];
+                    shoe.ShoeName = sqlDataReader["shoename"].ToString();
+                    shoe.ShoeCode = sqlDataReader["shoecode"].ToString();
+                    shoe.ShoeQty = (int)sqlDataReader["shoeqty"];
+                    shoe.ShoeSize = (int)sqlDataReader["shoesize"];
+                    shoe.RealPrice = (float)Convert.ToDouble(sqlDataReader["realprice"]);
+                    shoe.SellPrice = (float)Convert.ToDouble(sqlDataReader["sellprice"]);
+                    shoe.Color = sqlDataReader["color"].ToString();
+                    shoe.Gender = (Gender)sqlDataReader["gender"];
+                    shoe.ShoeType = (ShoeType)sqlDataReader["shoetype"];
+                    shoe.Note = sqlDataReader["note"].ToString();
+                    shoe.IsDeleted = (int)sqlDataReader["isdeleted"];
+                    shoe.ShopId = (int)sqlDataReader["ShopId"];
+                    if (!Convert.IsDBNull(sqlDataReader["shoeimage"]))
+                    {
+                        shoe.Img = (byte[])sqlDataReader["shoeimage"];
+                        string base64String = Convert.ToBase64String(shoe.Img, 0, shoe.Img.Length);
+                        shoe.ImageString = base64String;
+                    }
+                    if (!Convert.IsDBNull(sqlDataReader["modifypricetime"]))
+                    {
+                        shoe.ModifyPriceTime = Convert.ToDateTime(sqlDataReader["modifypricetime"]);
+                    }
+                    shoes.Add(shoe);
+                }
+            }
+            _conn.Close();
+            return shoes.ToList();
+        }
+        #endregion
+
+        #region GetShoeInfoById
+        public Shoes GetShoesInfoById(Shoes input)
+        {
+            _conn.Open();
+
+            string spName = @"dbo.[GetShoeInfoById]";
+            SqlCommand cmd = new SqlCommand(spName, _conn);
+
+            cmd.Parameters.AddWithValue("@ShoeId", input.Id);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataReader sqlDataReader = cmd.ExecuteReader();
+
+            var shoes = new List<Shoes>();
+            if (sqlDataReader.HasRows)
+            {
+                while (sqlDataReader.Read())
+                {
+                    var shoe = new Shoes();
+                    shoe.Id = (int)sqlDataReader["id"];
+                    shoe.ShoeName = sqlDataReader["shoename"].ToString();
+                    shoe.ShoeCode = sqlDataReader["shoecode"].ToString();
+                    shoe.ShoeQty = (int)sqlDataReader["shoeqty"];
+                    shoe.ShoeSize = (int)sqlDataReader["shoesize"];
+                    shoe.RealPrice = (float)Convert.ToDouble(sqlDataReader["realprice"]);
+                    shoe.SellPrice = (float)Convert.ToDouble(sqlDataReader["sellprice"]);
+                    shoe.Color = sqlDataReader["color"].ToString();
+                    shoe.Gender = (Gender)sqlDataReader["gender"];
+                    shoe.ShoeType = (ShoeType)sqlDataReader["shoetype"];
+                    shoe.Note = sqlDataReader["note"].ToString();
+                    shoe.IsDeleted = (int)sqlDataReader["isdeleted"];
+                    shoe.ShopId = (int)sqlDataReader["ShopId"];
+                    if (!Convert.IsDBNull(sqlDataReader["shoeimage"]))
+                    {
+                        shoe.Img = (byte[])sqlDataReader["shoeimage"];
+                        string base64String = Convert.ToBase64String(shoe.Img, 0, shoe.Img.Length);
+                        shoe.ImageString = base64String;
+                    }
+                    if (!Convert.IsDBNull(sqlDataReader["modifypricetime"]))
+                    {
+                        shoe.ModifyPriceTime = Convert.ToDateTime(sqlDataReader["modifypricetime"]);
+                    }
+                    shoes.Add(shoe);
+                }
+            }
+            _conn.Close();
+            return shoes.FirstOrDefault();
+        }
+        #endregion
+
+        #region Lấy thông tin Cart
+        public List<ViewCartDto> GetCartInfo(Cart input)
+        {
+            _conn.Open();
+
+            string spName = @"dbo.[GetCartInfo]";
+            SqlCommand cmd = new SqlCommand(spName, _conn);
+
+            cmd.Parameters.AddWithValue("@Quantity", input.Quantity);
+            cmd.Parameters.AddWithValue("@CusId", input.CusId);
+            cmd.Parameters.AddWithValue("@ShoeId", input.ShoeId);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataReader sqlDataReader = cmd.ExecuteReader();
+
+            var shoes = new List<ViewCartDto>();
+            if (sqlDataReader.HasRows)
+            {
+                while (sqlDataReader.Read())
+                {
+                    var shoe = new ViewCartDto();
+                    shoe.Id = (int)sqlDataReader["id"];
+                    shoe.ShoeName = sqlDataReader["shoename"].ToString();
+                    shoe.ShoeCode = sqlDataReader["shoecode"].ToString();
+                    shoe.ShoeQty = (int)sqlDataReader["shoeqty"];
+                    shoe.ShoeSize = (int)sqlDataReader["shoesize"];
+                    shoe.RealPrice = (float)Convert.ToDouble(sqlDataReader["realprice"]);
+                    shoe.SellPrice = (float)Convert.ToDouble(sqlDataReader["sellprice"]);
+                    shoe.Color = sqlDataReader["color"].ToString();
+                    shoe.Gender = (Gender)sqlDataReader["gender"];
+                    shoe.ShoeType = (ShoeType)sqlDataReader["shoetype"];
+                    shoe.Note = sqlDataReader["note"].ToString();
+                    shoe.IsDeleted = (int)sqlDataReader["isdeleted"];
+                    shoe.ShopId = (int)sqlDataReader["ShopId"];
+                    if (!Convert.IsDBNull(sqlDataReader["shoeimage"]))
+                    {
+                        shoe.Img = (byte[])sqlDataReader["shoeimage"];
+                        string base64String = Convert.ToBase64String(shoe.Img, 0, shoe.Img.Length);
+                        shoe.ImageString = base64String;
+                    }
+                    if (!Convert.IsDBNull(sqlDataReader["modifypricetime"]))
+                    {
+                        shoe.ModifyPriceTime = Convert.ToDateTime(sqlDataReader["modifypricetime"]);
+                    }
+                    //cart
+                    shoe.QuantityOrder = (int)sqlDataReader["QuantityOrder"];
+                    shoe.CartId = (int)sqlDataReader["CartId"];
+                    shoes.Add(shoe);
+                }
+            }
+            _conn.Close();
+            return shoes.ToList();
+        }
+        #endregion
+
+        #region Tạo mới Cart
+        public bool CreateCartInfoDL(Cart input)
+        {
+            _conn.Open();
+
+            string SQL = @"dbo.[sp_Cart_Create]";
+
+            SqlCommand sqlCommand = new SqlCommand(SQL, _conn);
+            sqlCommand.Parameters.AddWithValue("@Quantity", input.Quantity);
+            sqlCommand.Parameters.AddWithValue("@CusId", input.CusId);
+            sqlCommand.Parameters.AddWithValue("@ShoeId", input.ShoeId);
+            //sqlCommand.Parameters.AddWithValue("@Id", input.Id);
+
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            if (sqlCommand.ExecuteNonQuery() > 0) return true;
+            _conn.Close();
+            return false;
+        }
+        #endregion
+
+        #region Chỉnh sửa Cart
+        public bool UpdateCartInfoDL(Cart input)
+        {
+            _conn.Open();
+            string SQL = @"dbo.[sp_Cart_Update]";
+
+            SqlCommand sqlCommand = new SqlCommand(SQL, _conn);
+            sqlCommand.Parameters.AddWithValue("@Quantity", input.Quantity);
+            sqlCommand.Parameters.AddWithValue("@Id", input.Id);
+
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            if (sqlCommand.ExecuteNonQuery() > 0) return true;
+            _conn.Close();
+            return false;
+        }
+        #endregion
+
+        #region Xoá Cart
+        public bool DeleteCartInfoDL(Cart input)
+        {
+            _conn.Open();
+            string SQL = @"dbo.[sp_Cart_Delete]";
+
+            SqlCommand sqlCommand = new SqlCommand(SQL, _conn);
+            sqlCommand.Parameters.AddWithValue("@Id", input.Id);
+
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            if (sqlCommand.ExecuteNonQuery() > 0) return true;
+            _conn.Close();
+            return false;
+        }
+        #endregion
+
     }
 
 }

@@ -64,7 +64,7 @@ export class NavbarComponent {
 
   logout() {
     this.authenticationService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/admin/login']);
     this.checkMenu = false;
     this.changeMenu.emit(this.checkMenu);
   }

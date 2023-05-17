@@ -34,6 +34,7 @@ namespace AppApi.DL
                     cus.CusEmail = sqlDataReader["cus_email"].ToString();
                     cus.CusTel = sqlDataReader["cus_tel"].ToString();
                     cus.CusAdd = sqlDataReader["cus_add"].ToString();
+                    cus.PassWord = sqlDataReader["cus_password"].ToString();
                     cus.CusShoeBuyPrice = (float)Convert.ToDouble(sqlDataReader["shoebuyprice"]); 
                     customers.Add(cus);
                 }
@@ -52,6 +53,7 @@ namespace AppApi.DL
             sqlCommand.Parameters.AddWithValue("@CusAdd", input.CusAdd??"");
             sqlCommand.Parameters.AddWithValue("@CusEmail", input.CusEmail?? "");
             sqlCommand.Parameters.AddWithValue("@CusTel", input.CusTel ?? "");
+            sqlCommand.Parameters.AddWithValue("@PassWord", input.PassWord ?? "123456");
             sqlCommand.CommandType = CommandType.StoredProcedure;
 
             if (sqlCommand.ExecuteNonQuery() > 0) return true;
@@ -72,6 +74,7 @@ namespace AppApi.DL
             sqlCommand.Parameters.AddWithValue("@CusTel", input.CusTel ??"");
             sqlCommand.Parameters.AddWithValue("@Id", input.Id);
             sqlCommand.Parameters.AddWithValue("@ShoeBuyPrice", input.CusShoeBuyPrice);
+            sqlCommand.Parameters.AddWithValue("@PassWord", input.PassWord);
             sqlCommand.CommandType = CommandType.StoredProcedure;
 
             if (sqlCommand.ExecuteNonQuery() > 0) return true;
@@ -92,6 +95,73 @@ namespace AppApi.DL
             if (sqlCommand.ExecuteNonQuery() > 0) return true;
             _conn.Close();
             return false;
+        }
+
+        public Customer LogInCustomer(Customer input)
+        {
+            _conn.Open();
+            string SQL = @"dbo.[sp_Customer_LogIn]";
+            //string SQL = string.Format("INSERT INTO dbo.customer(cus_name, cus_add,cus_email, cus_tel, shoebuyprice, isdeleted) VALUES(@CusName, @CusAdd,@CusEmail, @CusTel, 0, 0)");
+            SqlCommand sqlCommand = new SqlCommand(SQL, _conn);
+            sqlCommand.Parameters.AddWithValue("@Password", input.PassWord ?? "");
+            sqlCommand.Parameters.AddWithValue("@CusTel", input.CusTel ?? "");
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+            var customers = new List<Customer>();
+            if (sqlDataReader.HasRows)
+            {
+                while (sqlDataReader.Read())
+                {
+                    var cus = new Customer();
+                    cus.Id = (int)sqlDataReader["id"];
+                    cus.CusName = sqlDataReader["cus_name"].ToString();
+                    cus.CusEmail = sqlDataReader["cus_email"].ToString();
+                    cus.CusTel = sqlDataReader["cus_tel"].ToString();
+                    cus.CusAdd = sqlDataReader["cus_add"].ToString();
+                    cus.PassWord = sqlDataReader["cus_password"].ToString();
+                    cus.CusShoeBuyPrice = (float)Convert.ToDouble(sqlDataReader["shoebuyprice"]);
+                    customers.Add(cus);
+                }
+            }
+
+            _conn.Close();
+            return customers.FirstOrDefault();
+        }
+
+        public Customer GetCustomerById(Customer input)
+        {
+            _conn.Open();
+
+            string spName = @"dbo.[GetCustomers]";
+            SqlCommand cmd = new SqlCommand(spName, _conn);
+
+            cmd.Parameters.AddWithValue("@CusName", input.CusName ?? "");
+            cmd.Parameters.AddWithValue("@CusTel", input.CusTel ?? "");
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataReader sqlDataReader = cmd.ExecuteReader();
+
+            var customers = new List<Customer>();
+            if (sqlDataReader.HasRows)
+            {
+                while (sqlDataReader.Read())
+                {
+                    var cus = new Customer();
+                    cus.Id = (int)sqlDataReader["id"];
+                    cus.CusName = sqlDataReader["cus_name"].ToString();
+                    cus.CusEmail = sqlDataReader["cus_email"].ToString();
+                    cus.CusTel = sqlDataReader["cus_tel"].ToString();
+                    cus.CusAdd = sqlDataReader["cus_add"].ToString();
+                    cus.PassWord = sqlDataReader["cus_password"].ToString();
+
+                    cus.CusShoeBuyPrice = (float)Convert.ToDouble(sqlDataReader["shoebuyprice"]);
+                    customers.Add(cus);
+                }
+            }
+            _conn.Close();
+            return customers.FirstOrDefault(e => e.Id == input.Id);
         }
 
     }

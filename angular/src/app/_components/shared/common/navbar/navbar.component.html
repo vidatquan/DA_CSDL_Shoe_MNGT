@@ -28,29 +28,27 @@
 
   </div>
   <nav class="main-menu" [ngStyle]="checkMenu ? { 'width.px': 250 } : ''">
-    <!-- <div style="text-align: center;cursor: pointer;" *ngIf="checkMenu" >
-      <img (click)="icon.click()" [src]="url" alt="Avatar" style=" margin-left: auto;
-        margin-right: auto;display: flex;border:0.5px solid #555; border-radius: 50%; height: 150px; width: 150px;" >
-      <h5 (click)="icon.click()" style="margin-top: 10px;">{{currentUser.FullName}}</h5>
-    </div> -->
     <ul>
       <li style="visibility: hidden;">
         <a routerLink="log-info" #loginfo>
         </a>
       </li>
-      <li *ngIf="currentUser.RoleId == 1">
+      <!-- <li *ngIf="currentUser.RoleId == 1"> -->
+        <li >
         <a class="test" routerLink="employee">
           <i class="fa fa-user fa-2x"></i>
           <span class="nav-text"> Nhân viên </span>
         </a>
       </li>
-      <li *ngIf="currentUser.RoleId == 1">
+      <!-- <li *ngIf="currentUser.RoleId == 1"> -->
+        <li >
         <a routerLink="shoe-shop">
           <i class="fa fa-bank fa-2x"></i>
           <span class="nav-text"> {{"Quản lý cửa hàng giày"}} </span>
         </a>
       </li>
-      <li *ngIf="currentUser.RoleId == 1">
+      <!-- <li *ngIf="currentUser.RoleId == 1"> -->
+        <li >
         <a routerLink="shoe-supplier">
           <i class="fa fa-cubes fa-2x"></i>
           <span class="nav-text"> {{"Quản lý nhà cung cấp"}} </span>
@@ -97,7 +95,8 @@
         </a>
       </li> -->
 
-      <li *ngIf="currentUser.RoleId == 2">
+      <!-- <li *ngIf="currentUser.RoleId == 2"> -->
+        <li >
         <a (click)="check(1)">
           <i class="fa fa-shopping-cart  fa-2x"></i>
           <span class="nav-text"> Đặt hàng </span>
@@ -118,7 +117,8 @@
         </a>
       </li>
 
-      <li *ngIf="currentUser.RoleId == 2">
+      <!-- <li *ngIf="currentUser.RoleId == 2"> -->
+        <li>
         <a (click)="check(2)">
           <i class="fa fa-check-square-o fa-2x"></i>
           <span class="nav-text"> Nhận hàng </span>
@@ -159,14 +159,17 @@
           <span class="nav-text"> Lịch sử giá phụ tùng</span>
         </a>
       </li> -->
-      <li *ngIf="currentUser.RoleId == 3">
+
+      <!-- <li *ngIf="currentUser.RoleId == 3"> -->
+        <li>
         <a routerLink="shoe-sale">
           <i class="fa fa-money fa-2x"></i>
           <span class="nav-text"> Bán giày</span>
         </a>
       </li>
 
-      <li *ngIf="currentUser.RoleId == 2">
+      <!-- <li *ngIf="currentUser.RoleId == 2"> -->
+        <li >
         <a (click)="check(4)">
           <i class="fa fa-line-chart  fa-2x"></i>
           <span class="nav-text"> Báo cáo </span>

@@ -42,3 +42,30 @@ input[type="radio"] {
 
 }
 
+a.del-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+
+//chua xong
+.load-more {
+  // border: solid 1.5rem rgba(#000, .2);
+  // height: 50vmin;
+  // max-width: 13em;
+  // max-height: 7em;
+  // background:
+  //               border-box /* background-origin */
+  //               padding-box /* background-clip */;
+}
+
+// .content-product:nth-child(n+6){
+//   display: none;
+// }
+
+.linear {
+ // background: linear-gradient(0turn, #d6d6d6, 4%, white); // chua giai quyet duọc
+}
+
+
+

@@ -1,4 +1,4 @@
-<div style="margin-top:120px;width: 1530px;margin-bottom:200px;">
+<div style="margin-top:120px;width: 1530px;margin-bottom:200px;" *ngIf="products && products.length > 0">
   <div style="margin: auto;
   width:80%;
   padding: 10px;">
@@ -9,7 +9,7 @@
           Giỏ hàng của bạn
         </span>
       </ion-text>
-      <div class="info-prodcut">
+      <div class="info-prodcut linear">
         <div class="row text-center" style="border: 1px solid black;font-size:18px;color: black;">
           <div class="col-7">
             Sản phẩm
@@ -24,10 +24,12 @@
             Thành tiền
           </div>
         </div>
-        <div class="row text-center mt-3 pb-2" style="font-size:18px;color: black;border-bottom: 0.5px solid gray;" *ngFor="let product of products">
+        <div class="content-product row text-center mt-3 pb-2"
+            style="font-size:18px;color: black;border-bottom: 0.5px solid gray;"
+            *ngFor="let product of products">
           <div class="col-7 text-left d-flex row ">
             <div class="ml-5 mr-5 ">
-              <img  [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" alt="shoes" class="img-shoe" width="100px" height="100px">
+              <img  [src]="product.url" alt="shoes" class="img-shoe" width="100px" height="100px">
             </div>
             <div class="col-8" style=" font-weight: bold;position: relative;">
               <div style="margin: 0;
@@ -35,26 +37,40 @@
                           top: 50%;
                           -ms-transform: translateY(-50%);
                           transform: translateY(-50%);">
-                <p>{{product.name}}</p>
-                <p>SIZE {{product.price}}</p>
+                <p>{{product.ShoeName}}</p>
+                <p>SIZE {{product.size}}</p>
               </div>
             </div>
           </div>
-          <div class="col-2 text-right mr-2" style="margin:auto">
-            {{product.price + ' VND'}}
+          <div class="col-2 text-right mr-2 text-center" style="margin:auto">
+            {{product.SellPrice + ' ₫'}}
           </div>
           <div class="col-1" style="margin:auto">
-            <input (keyup)="changeQuantity(product)" min="1" class="input-info text-center" style="width: 100%;" type="number" placeholder="SL" [(ngModel)]="product.quantity">
+            <input [disabled]="isConfirmCart" (ngModelChange)="onValueChange($event, product)" min="1" max="12" class="input-info text-center" style="width: 100%;" type="number" placeholder="SL" [(ngModel)]="product.QuantityOrder">
           </div>
-          <div class="col-2 text-right" style="margin:auto">
-            {{product.price + ' VND'}}
-            <ion-icon name="trash-outline" class=" ml-1" style="font-size: 16px;"></ion-icon>
+          <div class="col-2 text-right mr-3 text-center" style="margin:auto">
+            {{(product.SellPrice* product.QuantityOrder) + ' ₫'}}
+            <a (click)="deleteCart(product)" style="cursor: pointer;" [ngClass]="isConfirmCart ? 'del-disabled' : '' " >
+              <ion-icon name="trash-outline" class=" ml-1" style="font-size: 16px;"></ion-icon>
+            </a>
+
             <!-- <button type="button" (click)="delete(product)"><i class="pi pi-trash" style="font-size: 1.2rem" ></i></button> -->
           </div>
         </div>
       </div>
+      <!-- <div class="load-more text-center" style="font-size: 20px;color:black" *ngIf="products.length > 4">
+        <a (click)="loadMore()">
+          <ion-text color="dark" style="cursor: pointer;">
+            {{'Xem thêm'}}
+            <ion-icon name="arrow-down-outline" style="margin-left: 5px;"></ion-icon>
+          </ion-text>
+        </a>
+      </div> -->
+      <div style="margin-right:15px" class="text-right mt-2" *ngIf="!isConfirmCart">
+        <ion-button  style="width:50%" fill="outline" color="dark" style="margin-right:5px;" (click)="confirmCart()">Xác nhận giỏ hàng</ion-button>
+      </div>
     </div>
-    <div>
+    <div *ngIf="isConfirmCart">
       <div class="row">
         <div class="col-8">
           <div class="mr-4">
@@ -67,11 +83,11 @@
 
             <div class="row mb-3">
               <div class="col-12 d-flex justify-content-between mb-3">
-                <input class="input-info" style="width: 100%;" type="text" placeholder="Họ và tên">
+                <input disabled class="input-info" style="width: 100%;" type="text" placeholder="Họ và tên" name="CusName" [(ngModel)]="customer.CusName">
               </div>
               <div class="col-12 d-flex justify-content-between mb-3">
-                <input class="input-info" style="width: 48%;margin-right:10px" type="text" placeholder="Email">
-                <input class="input-info" style="width: 48%;" type="text" placeholder="Số điện thoại">
+                <input disabled class="input-info" style="width: 48%;margin-right:10px" type="text" placeholder="Email" name="CusEmail" [(ngModel)]="customer.CusEmail">
+                <input disabled class="input-info" style="width: 48%;" type="text" placeholder="Số điện thoại" name="CusEmail" [(ngModel)]="customer.CusEmail">
               </div>
               <div class="col-12 d-flex d-flex justify-content-between mb-3">
                 <input style="width:30%" type="text" placeholder="Tỉnh/Thành phố" class=" input-info">
@@ -79,7 +95,7 @@
                 <input style="width:30%" type="text" placeholder="Phường/Xã" class=" input-info">
               </div>
               <div class="col-12 mb-3">
-                <input class=" input-info" style="width: 100%;" type="text" placeholder="Địa chỉ">
+                <input disabled class=" input-info" style="width: 100%;" type="text" placeholder="Địa chỉ" name="CusAdd" [(ngModel)]="customer.CusAdd">
               </div>
 
             </div>
@@ -171,7 +187,7 @@
           <div class="v-infomation-content">
             <div class="customer-payment">
               <div> Tạm tính: </div>
-              <div> 10.600.000 <sup>đ</sup></div>
+              <div> {{tempPrice}} <sup>đ</sup></div>
             </div>
             <div class="customer-payment">
               <div> Chiết khấu: </div>
@@ -194,9 +210,9 @@
 
           <div style="display: flex;margin-left:15px">
             <!-- <ion-button color="dark"><ion-icon name="funnel-outline"></ion-icon>Khôi phục</ion-button> -->
-            <ion-button style="width:50%" fill="outline" color="dark" style="margin-right:5px;">Tiếp tục mua
+            <ion-button (click)="continueShopping()" style="width:50%" fill="outline" color="dark" style="margin-right:5px;">Tiếp tục mua
               sắm</ion-button>
-            <ion-button style="width:50%" color="dark">Đặt hàng</ion-button>
+            <ion-button (click)="orderCart()" style="width:50%" color="dark">Đặt hàng</ion-button>
           </div>
         </div>
       </div>
@@ -205,7 +221,7 @@
   </div>
 </div>
 
-<div style="margin-top:200px;width: 1530px;margin-bottom:200px;">
+<div style="margin-top:200px;width: 1530px;margin-bottom:200px;" *ngIf="!products || products.length < 1">
   <div style="margin: auto;width:80%;padding: 10px;">
 
     <div class="d-flex  row">

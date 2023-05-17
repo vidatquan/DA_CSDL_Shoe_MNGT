@@ -69,6 +69,7 @@ import { UserLogInComponent } from './pages_user/user-log-in/user-log-in.compone
 import { FolllowOrderComponent } from './pages_user/folllow-order/folllow-order.component';
 import { UserRegisterComponent } from './pages_user/user-register/user-register.component';
 import { OrderDetailComponent } from './pages_user/order-detail/order-detail.component';
+import { UserInfoComponent } from './pages_user/user-info/user-info.component';
 // import { CurrencyPipe } from '@angular/common';
 
 
@@ -117,7 +118,8 @@ import { OrderDetailComponent } from './pages_user/order-detail/order-detail.com
     UserLogInComponent,
     FolllowOrderComponent,
     UserRegisterComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,

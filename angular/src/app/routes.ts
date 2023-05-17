@@ -26,10 +26,11 @@ import { UserLogInComponent } from './pages_user/user-log-in/user-log-in.compone
 import { UserRegisterComponent } from './pages_user/user-register/user-register.component';
 import { FolllowOrderComponent } from './pages_user/folllow-order/folllow-order.component';
 import { OrderDetailComponent } from './pages_user/order-detail/order-detail.component';
+import { UserInfoComponent } from './pages_user/user-info/user-info.component';
 
 const appRoutes: Routes = [
 
-  { path: 'admin', component: AdminMainComponent, canActivate: [AuthGuard] ,
+  { path: 'admin', component: AdminMainComponent ,
     children: [
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: '',
@@ -67,6 +68,7 @@ const appRoutes: Routes = [
           { path: 'cart', component: UserCartComponent },
           { path: 'log-in', component: UserLogInComponent },
           { path: 'register', component: UserRegisterComponent },
+          { path: 'cus-info', component: UserInfoComponent },
           { path: 'follow-order', component: FolllowOrderComponent },
           { path: 'order-detail', component: OrderDetailComponent },
         ]

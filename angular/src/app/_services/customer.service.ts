@@ -25,4 +25,8 @@ export class CustomerService {
   registerCustomer(val: Customer) {
     return this.http.post(this.APIUrl + '/add-customer', val);
   }
+
+  loginCustomer(val: Customer) {
+    return this.http.post(this.APIUrl + '/login-customer', val);
+  }
 }

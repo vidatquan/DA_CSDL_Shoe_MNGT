@@ -96,5 +96,33 @@ namespace AppApi.Controllers
                 throw;
             }
         }
+
+        [HttpPost]
+        [Route("login-customer")]
+        public Customer LogInCustomer(Customer input)
+        {
+            try
+            {
+                return cus.LogInCustomer(input);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("cus-by-id")]
+        public Customer GetCustomerById(Customer input)
+        {
+            try
+            {
+                return cus.GetCustomerById(input);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

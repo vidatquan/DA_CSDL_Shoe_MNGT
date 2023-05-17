@@ -13,3 +13,12 @@
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(88, 103, 221, 0.25);
 }
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+// .red-tooltip + .tooltip > .tooltip-inner {background-color: #f00!important;}
+// .red-tooltip + .tooltip > .tooltip-arrow { border-bottom-color:#f00!important; }

@@ -12,3 +12,16 @@
   height:500px;
   width:100%;
 }
+
+.qty:hover .in-stock{
+  //visibility: hidden;
+  display: none;
+}
+.qty .qty-text{
+ // visibility: hidden;
+ display: none;
+}
+.qty:hover .qty-text{
+ // visibility: visible;
+ display: block;
+}

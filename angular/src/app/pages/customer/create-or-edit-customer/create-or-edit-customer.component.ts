@@ -88,10 +88,10 @@ export class CreateOrEditCustomerComponent implements OnInit {
       alertify.error('Email không hợp lệ');
       return false;
     }
-    if(this.cusList.some(e => e.CusTel == this.cus?.CusTel && e.Id != this.cus.Id)){
-      alertify.error('Số điện thoại khách hàng đã tồn tại');
-      return false;
-    }
+    // if(this.cusList.some(e => e.CusTel == this.cus?.CusTel && e.Id != this.cus.Id)){
+    //   alertify.error('Số điện thoại khách hàng đã tồn tại');
+    //   return false;
+    // }
     return true;
   }
   // Số điện thoại
@@ -99,7 +99,7 @@ export class CreateOrEditCustomerComponent implements OnInit {
     const PHONE_NUMBER_REGEX = /(0|[+]([0-9]{2})){1}[ ]?[0-9]{2}([-. ]?[0-9]){7}|((([0-9]{3}[- ]){2}[0-9]{4})|((0|[+][0-9]{2}[- ]?)(3|7|8|9|1)([0-9]{8}))|(^[\+]?[(][\+]??[0-9]{2}[)]?([- ]?[0-9]{2}){2}([- ]?[0-9]{3}){2}))$/gm;
     return !phoneNumber || PHONE_NUMBER_REGEX.test(phoneNumber);
   }
-  
+
   emailValidate(email: string) {
     const NUMBER_REG = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
     return NUMBER_REG.test(email);

@@ -47,7 +47,9 @@
   <ItemGroup>
     <Compile Include="DTO\Customer\GetCusInputDto.cs" />
     <Compile Include="DTO\Employee\GetEmployeeInput.cs" />
+    <Compile Include="DTO\Shoe-info\GetShoeInfoByCusInput.cs" />
     <Compile Include="DTO\Shoe-info\GetShoeInfoInput.cs" />
+    <Compile Include="DTO\Shoe-info\ViewCartDto.cs" />
     <Compile Include="DTO\Shoe-order\CancelShoeOrderInput.cs" />
     <Compile Include="DTO\Shoe-order\DataOrder.cs" />
     <Compile Include="DTO\Shoe-order\GetShoeOrderInput.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="DTO\Shoe-shipping\ShoeShippingDetailForViewDto.cs" />
     <Compile Include="DTO\Shoe-shipping\ShoeShippingForViewDto.cs" />
     <Compile Include="DTO\Shoe-Shop\GetShoeShopInput.cs" />
+    <Compile Include="Entity\Cart.cs" />
     <Compile Include="Entity\HistoryShoePrice.cs" />
     <Compile Include="Entity\ShoeShop.cs" />
     <Compile Include="Entity\ShoeOrder.cs" />

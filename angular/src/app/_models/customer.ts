@@ -8,4 +8,5 @@
   AreaId: number;
   CusShoeBuyPrice:number;
   IsDeleted:number;
+  PassWord: string;
 }

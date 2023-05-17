@@ -5,6 +5,8 @@ import { GetShoeInfoInput } from '../_models/shoe-info/GetShoeInfoInput';
 import { HistoryShoePrice } from '../_models/shoe-info/HistoryShoePrice';
 import { Shoes } from '../_models/shoe-info/shoes';
 import { GetShoeReceiveDetailInput } from '../_models/shoe-receive/GetShoeReceiveDetailInput';
+import { GetShoeInfoByCusInput } from '../_models/shoe-info/GetShoeInfoByCusInput';
+import { Cart } from '../_models/shoe-info/Cart';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +38,31 @@ export class ShoesService {
 
   createHistoryShoePrice(val: HistoryShoePrice) {
     return this.http.post(this.APIUrl + '/create-log', val);
+  }
+
+  //view customer
+  getShoesInfoByCustomer(val: GetShoeInfoByCusInput): Observable<any[]> {
+    return this.http.post<any>(this.APIUrl + '/cus-shoes', val);
+  }
+
+  getShoesInfoById(val: Shoes): Observable<any[]> {
+    return this.http.post<any>(this.APIUrl + '/shoe-by-id', val);
+  }
+
+  //cart
+  getCartInfo(val: GetShoeInfoInput): Observable<any[]> {
+    return this.http.post<any>(this.APIUrl + '/cart', val);
+  }
+
+  createCartInfo(val: Cart) {
+    return this.http.post(this.APIUrl + '/create-cart', val);
+  }
+
+  updateCartInfo(val: Cart) {
+    return this.http.post(this.APIUrl + '/update-cart', val);
+  }
+
+  deleteCartInfo(val: Cart): Observable<any[]> {
+    return this.http.post<any>(this.APIUrl + '/delete-cart', val);
   }
 }

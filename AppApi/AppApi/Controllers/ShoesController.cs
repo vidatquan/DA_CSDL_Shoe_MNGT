@@ -98,5 +98,89 @@ namespace AppApi.Controllers
                 throw;
             }
         }
+
+        [HttpPost]
+        [Route("cus-shoes")]
+        public List<Shoes> GetShoesInfoByCustomer(GetShoeInfoByCusInput input)
+        {
+            try
+            {
+                return shoe.GetShoesInfoByCustomer(input);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("shoe-by-id")]
+        public Shoes GetShoesInfoById(Shoes input)
+        {
+            try
+            {
+                return shoe.GetShoesInfoById(input);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("cart")]
+        public List<ViewCartDto> GetCartInfo(Cart input)
+        {
+            try
+            {
+                return shoe.GetCartInfo(input);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("create-cart")]
+        public bool CreateCartInfoDL(Cart input)
+        {
+            try
+            {
+                return shoe.CreateCartInfoDL(input);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("update-cart")]
+        public bool UpdateCartInfoDL(Cart input)
+        {
+            try
+            {
+                return shoe.UpdateCartInfoDL(input);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("delete-cart")]
+        public bool DeleteCartInfoDL(Cart input)
+        {
+            try
+            {
+                return shoe.DeleteCartInfoDL(input);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -16,6 +16,8 @@ namespace AppApi.Entities.Entity
         public int AreaId { get; set; }
         public float CusShoeBuyPrice { get; set; }
         public int IsDeleted { get; set; }
-        
+        public string PassWord { get; set; }
+
+
     }
 }

@@ -1,17 +1,17 @@
+import { finalize } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { finalize } from 'rxjs/operators';
 import { Customer } from 'src/app/_models/customer';
 import { GetCusInputDto } from 'src/app/_models/get-cus-input-dto';
 import { CustomerService } from 'src/app/_services/customer.service';
 declare let alertify: any;
 
 @Component({
-  selector: 'app-user-register',
-  templateUrl: './user-register.component.html',
-  styleUrls: ['./user-register.component.scss']
+  selector: 'app-user-info',
+  templateUrl: './user-info.component.html',
+  styleUrls: ['./user-info.component.scss']
 })
-export class UserRegisterComponent implements OnInit {
+export class UserInfoComponent implements OnInit {
   resgisterCus: Customer;
   cusList= [];
   constructor(
@@ -20,30 +20,31 @@ export class UserRegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.resgisterCus = new Customer();
+     //const cus = JSON.parse(localStorage.getItem('customer'));
+    // if(cus) this.resgisterCus = cus ?? new Customer();
     this.getCusList();
   }
 
   getCusList(){
-   // const cusCache = JSON.parse(localStorage.getItem('customer'));
+    const cusCache = JSON.parse(localStorage.getItem('customer'));
     var cus = new GetCusInputDto();
     cus.CusName = '';
     cus.CusTel = '';
-    this.customerService.getCustomers(cus).subscribe((res) => {
+    this.customerService.getCustomers(cus).pipe(finalize(() => {
+      localStorage.setItem('customer', JSON.stringify(this.resgisterCus));
+    })).subscribe((res) => {
       this.cusList = res;
+      this.resgisterCus = this.cusList.find(e => e.Id == cusCache.Id) ?? new Customer();
     });
   }
 
-
-  register(){
+  update(){
     if (!this.checkValidate()) return;
-    this.customerService.registerCustomer(this.resgisterCus).subscribe(() => {
+    this.customerService.updateCustomer(this.resgisterCus).subscribe(() => {
       this.getCusList();
-      alertify.success('Đăng ký thành công!');
-      this.router.navigateByUrl('/view/login');
+      alertify.success('Cập nhật thành công!');
     });
   }
-
 
   checkValidate() {
     if (!this.resgisterCus?.CusName || this.resgisterCus?.CusName === '') {
@@ -82,7 +83,4 @@ export class UserRegisterComponent implements OnInit {
     const NUMBER_REG = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
     return NUMBER_REG.test(email);
   }
-
-
-
 }

@@ -15,12 +15,9 @@
           border: 2px solid #000000;border-radius: 5px;width: 220px;height:50px;
           color:black;padding-left: 5px;font-size: initial;font-weight: 400;"
            [ngModel]="selectedShopId" (ngModelChange)="selectedShopId=($event)">
-            <option selected value="0">Choose...</option>
-            <option value=1>
-              <ion-label >{{'Thanh xuân Nam'}}</ion-label>
+            <option value={{item.value}} *ngFor="let item of shopList">
+              <ion-label >{{item.label}}</ion-label>
             </option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
           </select>
         </div>
         <div style="margin-left: 20px;margin-top:5px">
@@ -117,10 +114,21 @@
           <div class="col-lg-12 col-md-12 col-6" *ngFor="let product of productsPagination"
             style="margin-bottom: 15px;text-align: center;">
             <ion-card>
-              <img alt="Silhouette of mountains" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" />
-              <ion-card-header>
-                <ion-card-title>{{ product.name }}</ion-card-title>
-                <ion-card-subtitle color="danger">{{ product.price + ' VND' }}</ion-card-subtitle>
+              <!-- <img alt="Silhouette of mountains" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/blue-t-shirt.jpg'" /> -->
+              <img alt="Silhouette of mountains" [src]="product.url" width="280px" height="280px"/>
+              <ion-card-header >
+                <ion-card-title
+                data-toggle="tooltip" data-placement="bottom" title="{{ product.ShoeName }}"
+                style="display: inline-block;
+                  width: 18rem;
+                  white-space: nowrap;
+                  overflow: hidden !important;
+                  text-overflow: ellipsis;
+                  font-weight: 300;">{{ product.ShoeName }}</ion-card-title>
+
+                <ion-card-subtitle style="font-weight: bold;
+                color: black;">{{ product.SellPrice + ' ₫' }}</ion-card-subtitle>
+                <!-- <ion-card-subtitle color="danger">{{ product.ShoeQty}}</ion-card-subtitle> -->
               </ion-card-header>
 
               <ion-button (click)="showDetail(product)" fill="clear" style="width: 100%;"><ion-icon name="bag-outline"
@@ -129,7 +137,7 @@
           </div>
         </div>
 
-        <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)" [length]="products.length"
+        <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)" [length]="products?.length" *ngIf="products && products.length"
           [pageSize]="pageSize" [disabled]="false" [showFirstLastButtons]="true" [hidePageSize]="true"
           [pageIndex]="pageIndex" aria-label="Select page"
           style="width: 100%;background: black;margin-top: 24px;">
